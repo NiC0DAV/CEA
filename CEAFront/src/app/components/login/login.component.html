@@ -1,0 +1,29 @@
+<section>
+    <div class="imgBx">
+        <img class="img" src="assets/carlogimg.jpg" alt="">
+    </div>
+    <div class="contentBx">
+        <div class="formBx">
+            <h2>Iniciar Sesión</h2>
+            <form action="">
+                <div class="inputBx">
+                    <span>Correo Electronico</span>
+                    <input type="text" id="username">
+                </div>
+                <div class="inputBx">
+                    <span>Contraseña</span>
+                    <input type="password" id="password">
+                </div>
+                <div class="remember">
+                    <label for=""><input type="checkbox"> Recordarme</label>
+                </div>
+                <div class="inputBx">
+                    <input type="submit" value="Iniciar Sesión">
+                </div>
+                <div class="inputBx">
+                    <p>No tienes una cuenta? <a [routerLink]="['/register']">Registrarme</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

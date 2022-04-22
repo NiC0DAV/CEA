@@ -1,0 +1,80 @@
+<section>
+    <div class="imgBx">
+        <img class="img" src="assets/carlogimg.jpg" alt="">
+    </div>
+    <div class="contentBx">
+        <div class="formBx">
+            <h2>Registrarme</h2>
+            <form action="">
+                <div class="placement">
+                <div class="inputBx">
+                    <span>Tipo de identificación</span>
+                    <select name="" id="">
+                        <option value="" selected="selected">Seleccione un tipo de identificación</option>
+                        <option value="">Cedula de Ciudadania</option>
+                        <option value="">Tarjeta de Identidad</option>
+                        <option value="">Cedula de Extranjeria</option>
+                        <option value="">Pasaporte</option>
+                    </select>
+                </div>
+                
+                    <div class="inputBx">
+                        <span>Numero de Identificación</span>
+                        <input type="number" id="idTipe">
+                    </div>
+                    <div class="inputBx">
+                        <span>Nombre</span>
+                        <input type="text" id="name">
+                    </div>
+                    <div class="inputBx">
+                        <span>Apellido</span>
+                        <input type="text" id="surname">
+                    </div>
+                    <div class="inputBx">
+                        <span>Dirección</span>
+                        <input type="text" id="address">
+                    </div>
+                    <div class="inputBx">
+                        <span>Correo Electronico</span>
+                        <input type="email" id="email">
+                    </div>
+
+                    <div class="inputBx">
+                        <span>Telefono</span>
+                        <input type="number" id="phone">
+                    </div>
+
+                    <div class="inputBx">
+                        <span>Celular</span>
+                        <input type="number" id="Celphone">
+                    </div>
+
+                    <div class="inputBx">
+                        <span>Rol</span>
+                        <select name="" id="">
+                            <option value="" selected="selected">Seleccione un rol</option>
+                            <option value="">Estudiante</option>
+                            <option value="">Profesor</option>
+                            <option value="">Administrador</option>
+                        </select>
+                    </div>
+
+                    <div class="inputBx">
+                        <span>Contraseña</span>
+                        <input type="password" id="password">
+                    </div>
+
+                </div>
+                <div class="remember">
+                    <label for=""><input type="checkbox"> Recordarme</label>
+                </div>
+                <div class="inputBx submit mx-auto">
+                    <input type="submit" value="Registrarme">
+                </div>
+                <div class="inputBx">
+                    <p>Ya tienes una cuenta? <a [routerLink]="['/login']">Iniciar Sesión</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
