@@ -1,7 +1,7 @@
 export class usuario{
     constructor(
         public id: number,
-        public documento: string,
+        public userId: string,
         public tipo_documento: string, 
         public nombres: string,
         public apellidos: string,
@@ -12,7 +12,7 @@ export class usuario{
         public tipo_Usuario: string,
         public contrasena: string,
         public huella: any,
-        public ultima_actt: string
+        public ultima_act: string
     ){
 
     }
