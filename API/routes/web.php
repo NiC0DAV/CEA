@@ -17,13 +17,13 @@ use App\Http\Controllers\UserController;
 
 Route::Post('api/login', [UserController::class, 'userLogin']);
 
-Route::get('api/dashboard/users', [UserController::class, 'fetchUser']);
+Route::Post('api/dashboard/users', [UserController::class, 'fetchUser']);
 
 Route::Post('api/dashboard/users/register', [UserController::class, 'userRegister']);
 
-Route::Put('api/dashboard/users/edit/{$id}', [UserController::class, 'userEdit']);
+Route::Put('api/dashboard/users/edit/{id}', [UserController::class, 'userEdit']);
 
-Route::Delete('api/dashboard/users/delete/{$id}', [UserController::class, 'userDelete']);
+Route::Delete('api/dashboard/users/delete/{id}', [UserController::class, 'userDelete']);
 
 
 

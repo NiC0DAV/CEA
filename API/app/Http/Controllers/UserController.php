@@ -5,15 +5,25 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 
-class UserController extends Controller
-{
+class UserController extends Controller{
+
+    public function fetchUser(){
+
+        $users = User::select
+        ('id','userId', 'tipo_documento', 'nombres', 'apellidos', 'direccion', 'correo_electronico', 'telefono', 'celular', 'tipo_usuario')
+        ->get();
+
+        return $users;
+    }
 
     public function userRegister(Request $request){
 
     // Recopilacion de la informacion ingresada 
         $jsonData = $request->input('json', null);
+
         $paramsObj = json_decode($jsonData); 
         $paramsArray = json_decode($jsonData, true);
+        
         $paramsArray = array_map('trim', $paramsArray);
 
         if(!empty($paramsArray) && !empty($paramsObj)){
@@ -117,7 +127,108 @@ class UserController extends Controller
 
         }
 
-
         return response()->json($signUp, 200);
     }
+
+
+    public function userEdit(Request $request, $id){
+        $tokenAuth = $request->header('Authorization');
+
+        $jwtValidator = new \JwtAuth();
+        $checkToken = $jwtValidator->checkToken($tokenAuth);
+
+        $jsonData = $request->input('json', null);
+        $paramsArray = json_decode($jsonData, true);
+
+        if($checkToken){
+            $userCheck = $jwtValidator->checkToken($tokenAuth, true);
+            
+            $validate = \Validator::make($paramsArray, [
+                'nombres' => ['required','alpha'],
+                'apellidos' => ['required', 'alpha'],
+                'direccion' => ['required', 'alpha'],
+                'correo_electronico' => ['required', 'email', 'unique:users'.$userCheck->userId],
+                'telefono' => ['required', 'numeric|max:15'],
+                'celular' => ['required', 'numeric|max:15'],
+                'tipo_usuario' => ['numeric'],
+                'ultima_act' => ['required','alpha']
+            ]);
+
+            unset($paramsArray['userId']);
+            unset($paramsArray['tipo_documento']);
+            unset($paramsArray['contrasena']);
+            unset($paramsArray['created_at']);
+            
+            $user = User::where('userId', $id)->update($paramsArray);
+
+            if ($user == 1){
+                $data = array(
+                    'code' => 200,
+                    'status' => 'Success',
+                    'user' => $userCheck,
+                    'update State' => $user,
+                    'changes' => $paramsArray
+                );
+            }else{
+                $data = array(
+                    'code' => 400,
+                    'status' => 'Error',
+                    'update State' => $user,
+                    'message' => 'Ha ocurrido un error alterando la informacion del usuario'
+                );
+            }
+
+            return response()->json($data, $data['code']);
+
+        }else{
+
+            $data = array(
+                'code' => 400,
+                'status' => 'Error',
+                'message' => 'Error el usuario no esta identificado'
+            );
+        }
+
+        return response()->json($data, $data['code']);
+
+
+    }
+
+    public function userDelete(Request $request, $id){
+
+        $tokenAuth = $request->header('Authorization');
+
+        $jwtValidator = new \JwtAuth();
+        $checkToken = $jwtValidator->checkToken($tokenAuth);
+
+        if($checkToken){
+
+            $user = User::where('userId',$id);
+
+            // $userData = User::find($i);
+            // $userData = User::select('ID')->whereColumn('userId', $id);
+
+                $user->delete();
+
+                $data = array(
+                    'code' => 200,
+                    'status' => 'Success',
+                    'message' => 'Usuario eliminado de manera exitosa'
+                );
+
+            return response()->json($data, $data['code']);
+        
+        }else{
+
+            $data = array(
+                'code' => 400,
+                'status' => 'Error',
+                'message' => 'Error el usuario no esta identificado'
+            );
+
+        }
+
+        return response()->json($data, $data['code']);
+    }
+
 }
