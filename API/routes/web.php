@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PruebasController;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\ApiAuthMiddleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +24,7 @@ Route::Post('api/dashboard/users/register', [UserController::class, 'userRegiste
 
 Route::Put('api/dashboard/users/edit/{id}', [UserController::class, 'userEdit']);
 
-Route::Delete('api/dashboard/users/delete/{id}', [UserController::class, 'userDelete']);
+Route::Delete('api/dashboard/users/delete/{id}', [UserController::class, 'userDelete'])->middleware(ApiAuthMiddleware::class);
 
 
 

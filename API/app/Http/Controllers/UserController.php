@@ -197,24 +197,20 @@ class UserController extends Controller{
     public function userDelete(Request $request, $id){
 
         $tokenAuth = $request->header('Authorization');
-
         $jwtValidator = new \JwtAuth();
         $checkToken = $jwtValidator->checkToken($tokenAuth);
 
         if($checkToken){
 
-            $user = User::where('userId',$id);
-
             // $userData = User::find($i);
             // $userData = User::select('ID')->whereColumn('userId', $id);
-
-                $user->delete();
-
-                $data = array(
-                    'code' => 200,
-                    'status' => 'Success',
-                    'message' => 'Usuario eliminado de manera exitosa'
-                );
+            $user = User::where('userId',$id);
+            $user->delete();
+            $data = array(
+                'code' => 200,
+                'status' => 'Success',
+                'message' => 'Usuario eliminado de manera exitosa'
+            );
 
             return response()->json($data, $data['code']);
         
@@ -223,7 +219,7 @@ class UserController extends Controller{
             $data = array(
                 'code' => 400,
                 'status' => 'Error',
-                'message' => 'Error el usuario no esta identificado'
+                'message' => 'El usuario no pudo ser eliminado intentelo nuevamente'
             );
 
         }
