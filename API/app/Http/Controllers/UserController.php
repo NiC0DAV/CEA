@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller{
 
-    public function fetchUser(){
+    public function fetchUser(Request $request){
 
         $users = User::select
-        ('id','userId', 'tipo_documento', 'nombres', 'apellidos', 'direccion', 'correo_electronico', 'telefono', 'celular', 'tipo_usuario')
+        ('id','userId', 'tipo_documento', 'nombres', 'apellidos', 'direccion', 'correo_electronico', 'telefono', 'celular', 'tipo_usuario', 'ultima_act')
         ->get();
 
         return $users;
@@ -18,7 +19,7 @@ class UserController extends Controller{
 
     public function userRegister(Request $request){
 
-    // Recopilacion de la informacion ingresada 
+        // Recopilacion de la informacion ingresada 
         $jsonData = $request->input('json', null);
 
         $paramsObj = json_decode($jsonData); 
@@ -91,38 +92,38 @@ class UserController extends Controller{
 
             return response()->json($data, $data['code']);
         }
-
-
         
     }
 
     public function userLogin(Request $request){
         $jwtValidator = new \JwtAuth();
-        
-        $jsonData = $request->input('json', null);
-        $paramsObj = json_decode($jsonData);
-        $paramsArray= json_decode($jsonData, true);
 
-        $validateData = \Validator::make($paramsArray,[
-            'correo_electronico' => ['required', 'email'],
-            'contrasena' => ['required']
+        $jsonData = $request->input('json', null);
+
+        $paramsObj = json_decode($jsonData);
+
+        $paramsArray = json_decode($jsonData, true);
+        
+        $validateData = Validator::make($paramsArray,[
+            'correo_electronico' => 'required|email',
+            'contrasena' => 'required'
         ]);
 
         if($validateData->fails()){
-            $data = array(
+            $signUp = array(
                 'status' => 'Error',
                 'code' => 404,
                 'message' => 'El usuario no se ha podido identificar',
-                'errors' => $validate->errors()
+                'errors' => $validateData->errors()
             );
 
         }else{
             $hashPass = hash('sha256', $paramsObj->contrasena);
-
+ 
             $signUp = $jwtValidator->signUp($paramsObj->correo_electronico, $hashPass);
 
             if(!empty($paramsObj->getToken)){
-                $signUp = $jwtAuth->signUp($params->email, $hashPass, true); 
+                $signUp = $jwtValidator->signUp($paramsObj->correo_electronico, $hashPass, true); 
             }
 
         }

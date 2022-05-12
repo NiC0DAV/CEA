@@ -1,0 +1,8 @@
+.nav-element{
+    text-decoration: none;
+    color: #fff !important;
+}
+
+.nav-element:hover{
+    color: #fff;
+}

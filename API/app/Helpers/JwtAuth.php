@@ -21,7 +21,6 @@ Class JwtAuth{
             'contrasena' => $password
         ])->first();
 
-        //Si las hay comprobar si son correctas
         $signUp = false;
 
         if(is_object($user)){
@@ -34,10 +33,10 @@ Class JwtAuth{
             $token = array(
                 'userId' => $user->userId,
                 'correo_electronico' => $user->correo_electronico,
-                'nombres' => $user->nombres,
-                'apellidos' => $user->apellidos,
+                'nombres' => $user->Nombres,
+                'apellidos' => $user->Apellidos,
                 'iat' => time(),//Fecha de creacion del token
-                'exp' => time()+(7*24*60*60)//tiempo de expiracion del token
+                'exp' => time()+(60*30)//tiempo de expiracion del token
             );
 
             $jwt = JWT::encode($token, $this->key, 'HS256' );

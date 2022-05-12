@@ -18,11 +18,11 @@ use App\Http\Middleware\ApiAuthMiddleware;
 
 Route::Post('api/login', [UserController::class, 'userLogin']);
 
-Route::Post('api/dashboard/users', [UserController::class, 'fetchUser']);
+Route::Post('api/dashboard/users', [UserController::class, 'fetchUser'])->middleware(ApiAuthMiddleware::class);
 
-Route::Post('api/dashboard/users/register', [UserController::class, 'userRegister']);
+Route::Post('api/dashboard/users/register', [UserController::class, 'userRegister'])->middleware(ApiAuthMiddleware::class);
 
-Route::Put('api/dashboard/users/edit/{id}', [UserController::class, 'userEdit']);
+Route::Put('api/dashboard/users/edit/{id}', [UserController::class, 'userEdit'])->middleware(ApiAuthMiddleware::class);
 
 Route::Delete('api/dashboard/users/delete/{id}', [UserController::class, 'userDelete'])->middleware(ApiAuthMiddleware::class);
 

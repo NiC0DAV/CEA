@@ -5,63 +5,93 @@
     <div class="contentBx">
         <div class="formBx">
             <h2>Registrarme</h2>
-            <form action="">
+            <form action="" #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)">
                 <div class="placement">
                 <div class="inputBx">
                     <span>Tipo de identificación</span>
-                    <select name="" id="">
-                        <option value="" selected="selected">Seleccione un tipo de identificación</option>
-                        <option value="">Cedula de Ciudadania</option>
-                        <option value="">Tarjeta de Identidad</option>
-                        <option value="">Cedula de Extranjeria</option>
-                        <option value="">Pasaporte</option>
+                    <select name="tipo_documento" id="tipo_documento" #docType="ngModel" [(ngModel)] = "user.tipo_documento" required pattern="[1-3]">
+                        <option value="0" selected="selected">Seleccione un tipo de identificación</option>
+                        <option value="1">Cedula de Ciudadania</option>
+                        <option value="2">Tarjeta de Identidad</option>
+                        <option value="3">Cedula de Extranjeria</option>
+                        <option value="4">Pasaporte</option>
                     </select>
+                    <small *ngIf="!docType.valid && docType.touched" class="invalid-feedback">
+                        Debe indicar el tipo de documento
+                    </small>
                 </div>
                 
                     <div class="inputBx">
                         <span>Numero de Identificación</span>
-                        <input type="number" id="idTipe">
+                        <input name="userId" id="userId" type="number" #userId="ngModel" [(ngModel)] = "user.userId" required pattern="[a-zA-Z1-9]+">
+                        <small *ngIf="!userId.valid && userId.touched" class="invalid-feedback d-block">
+                            El numero de identificacion no es valido
+                        </small>
                     </div>
                     <div class="inputBx">
                         <span>Nombre</span>
-                        <input type="text" id="name">
+                        <input name="nombres" type="text" id="name" #nombres="ngModel" [(ngModel)] = "user.nombres" required pattern="[a-zA-Z ]+">
+                        <small *ngIf="!nombres.valid && nombres.touched" class="invalid-feedback d-block">
+                            El nombre no es valido
+                        </small>
                     </div>
                     <div class="inputBx">
                         <span>Apellido</span>
-                        <input type="text" id="surname">
+                        <input name="apellidos" type="text" id="apellidos" #apellidos="ngModel" [(ngModel)] = "user.apellidos" required pattern="[a-zA-Z ]+">
+                        <small *ngIf="!apellidos.valid && apellidos.touched" class="invalid-feedback d-block">
+                            El apellido no es valido
+                        </small>
                     </div>
                     <div class="inputBx">
                         <span>Dirección</span>
-                        <input type="text" id="address">
+                        <input name="direccion" type="text" id="direccion" #direccion="ngModel" [(ngModel)] = "user.direccion" required pattern="^[a-zA-Z0-9#_- ]">
+                        <small *ngIf="!direccion.valid && direccion.touched" class="invalid-feedback d-block">
+                            El valor ingresado no es valido
+                        </small>
                     </div>
                     <div class="inputBx">
                         <span>Correo Electronico</span>
-                        <input type="email" id="email">
+                        <input name="correo_electronico" type="email" id="email" #correo_electronico="ngModel" [(ngModel)] = "user.correo_electronico" required pattern="^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6})*$">
+                        <small *ngIf="!correo_electronico.valid && correo_electronico.touched" class="invalid-feedback d-block">
+                            El correo electronico no es valido
+                        </small>
                     </div>
 
                     <div class="inputBx">
                         <span>Telefono</span>
-                        <input type="number" id="phone">
+                        <input name="telefono" type="number" id="telefono" #telefono="ngModel" [(ngModel)] = "user.telefono" required pattern="^\d+$">
+                        <small *ngIf="!telefono.valid && telefono.touched" class="invalid-feedback d-block">
+                            El telefono no es valido
+                        </small>
                     </div>
 
                     <div class="inputBx">
                         <span>Celular</span>
-                        <input type="number" id="Celphone">
+                        <input name="celular" type="number" id="celular" #celular="ngModel" [(ngModel)] = "user.celular" required pattern="^\d+$">
+                        <small *ngIf="!celular.valid && celular.touched" class="invalid-feedback d-block">
+                            El celular no es valido
+                        </small>
                     </div>
 
                     <div class="inputBx">
                         <span>Rol</span>
-                        <select name="" id="">
-                            <option value="" selected="selected">Seleccione un rol</option>
-                            <option value="">Estudiante</option>
-                            <option value="">Profesor</option>
-                            <option value="">Administrador</option>
+                        <select name="tipo_Usuario" id="tipo_Usuario" #tipo_Usuario="ngModel" [(ngModel)] = "user.tipo_Usuario" required pattern="[1-3]">
+                            <option value="0" selected="selected">Seleccione un rol</option>
+                            <option value="1">Estudiante</option>
+                            <option value="2">Profesor</option>
+                            <option value="3">Administrador</option>
                         </select>
+                        <small *ngIf="!tipo_Usuario.valid && tipo_Usuario.touched" class="invalid-feedback d-block">
+                            Debe indicar el rol del usuario
+                        </small>
                     </div>
 
                     <div class="inputBx">
                         <span>Contraseña</span>
-                        <input type="password" id="password">
+                        <input name="contrasena" type="password" id="contrasena" #contrasena="ngModel" [(ngModel)] = "user.contrasena" required pattern="(?=(.*[0-9]))(?=.*[\!@#$%^&*()\\[\]{}\-_+=~`|:;,./?])(?=.*[a-z])(?=(.*[A-Z]))(?=(.*)).{8,}">
+                        <small *ngIf="!contrasena.valid && contrasena.touched" class="invalid-feedback d-block">
+                            La contrasena ingresada no es valida
+                        </small>
                     </div>
 
                 </div>
@@ -69,10 +99,16 @@
                     <label for=""><input type="checkbox"> Recordarme</label>
                 </div>
                 <div class="inputBx submit mx-auto">
-                    <input type="submit" value="Registrarme">
+                    <div class="alert alert-success mb-2 text-center" *ngIf="status == 'Success'">
+                        El registro se ha completado correctamente.
+                    </div>
+                    <div class="alert alert-danger mb-2 text-center" *ngIf="status == 'Error'">
+                        Ocurrio un error realizando el registro.
+                    </div>
+                    <input type="submit" value="Registrarme" [disabled]="registerForm.invalid">
                 </div>
                 <div class="inputBx">
-                    <p>Ya tienes una cuenta? <a [routerLink]="['/login']">Iniciar Sesión</a></p>
+                    <p>Ver usuarios de la plataforma <a [routerLink]="['/dashboard']">Usuarios creados</a></p>
                 </div>
             </form>
         </div>

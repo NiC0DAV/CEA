@@ -25,10 +25,10 @@ class User extends Authenticatable
         'apellidos',
         'direccion',
         'Correo_Electronico',
+        'contrasena',
         'telefono',
         'celular',
         'tipo_Usuario',
-        'contrasena',
         'ultima_act'
     ];
 
