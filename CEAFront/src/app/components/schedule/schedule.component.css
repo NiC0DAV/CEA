@@ -197,18 +197,6 @@ aside .side-bar a.active{
     margin-left: 0;
 }
 
-.container{
-    max-width: 123%;
-}
-
-.container .jumbotron{
-    background: #7380ec;
-}
-
-.jumbotron p{
-    color: #fff;
-}
-
 aside .side-bar a.active::before{ 
     content: "";
     width: 6px;
@@ -252,31 +240,4 @@ main .date{
 main .date input[type="date"]{
     background: transparent;
     color: #363949;
-}
-
-main .insights{
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.6rem;
-}
-
-main .insights > div{
-    background: #fff;
-    padding: 1.8rem;
-    border-radius: 2rem;
-    margin-top: 1rem;
-    box-shadow: 0 2rem 3rem rgba(132,139,200,0.18);
-    transition: all 400ms ease;
-}
-
-main .insights > div:hover{
-    box-shadow: none;
-}
-
-main .insights > div span{
-    background: #7380ec;
-    padding: 0.5rem;
-    border-radius: 50%;
-    color: #fff;
-    font-size: 2rem;
 }

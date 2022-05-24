@@ -1,0 +1,153 @@
+<div class="contenedor">
+
+    <aside>
+        <div class="top">
+            <div class="logo">
+                <img src="assets/logo.png" alt="">
+                <h2>SGC <span class="danger">CEA</span></h2>
+                <div class="close" id="close-btn">
+                    <span class="material-symbols-outlined">close</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="side-bar">
+            <a [routerLink]="['/dashboard']">
+                <span class="material-symbols-sharp">grid_view</span>
+                <h3>Panel de Control</h3>
+            </a>
+            <a [routerLink]="['/dashboard/users']">
+                <span class="material-symbols-sharp">manage_accounts</span>
+                <h3>Usuarios</h3>
+            </a>
+            <a [routerLink]="['/dashboard/newuser']" class="active">
+                <span class="material-symbols-sharp">add</span>
+                <h3>Nuevo Usuario</h3>
+            </a>
+            <a [routerLink]="['/dashboard/schedule']">
+                <span class="material-symbols-sharp">receipt_long</span>
+                <h3>Horarios</h3>
+            </a>
+            <a [routerLink]="['/dashboard/assistance']">
+                <span class="material-symbols-sharp">insights</span>
+                <h3>Asistencias</h3>
+            </a>
+            <a [routerLink]="['/dashboard/payments']">
+                <span class="material-symbols-sharp">inventory</span>
+                <h3>Pagos</h3>
+            </a>
+            <a [routerLink]="['/dashboard/users']">
+                <span class="material-symbols-sharp">report_gmailerrorred</span>
+                <h3>Informes</h3>
+            </a>
+            <a href="#">
+                <span class="material-symbols-sharp">settings</span>
+                <h3>Configuracion</h3>
+            </a>
+
+            <a [routerLink]="['/login']">
+                <span class="material-symbols-sharp">logout</span>
+                <h3>Cerrar Sesión</h3>
+            </a>
+        </div>
+    </aside>
+
+    <main>
+        <h1>Crear Usuarios</h1>
+        <div class="container mx-auto mt-3">
+            <div class="content">
+                <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)">
+                    <div class="user-details">
+                        <div class="input-box">
+                            <span class="details">Tipo de Identificación</span>
+                            <select name="tipo_documento" id="tipo_documento" #tipo_documento="ngModel" [(ngModel)] = "user.tipo_documento" required pattern="[1-4]">
+                                <option value="0" selected>Seleccione un Tipo de Identificación</option>
+                                <option value="1">Cedula de Ciudadania</option>
+                                <option value="2">Tarjeta de Identidad</option>
+                                <option value="3">Pasaporte</option>
+                                <option value="4">Cedula de Extranjeria</option>
+                            </select>
+                            <small *ngIf="!tipo_documento.valid && tipo_documento.touched" class="invalid-feedback d-block">
+                                Debe indicar el tipo de documento
+                            </small>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Numero de Identificación</span>
+                            <input type="text" name="userId" id="userId" #userId="ngModel" [(ngModel)] = "user.userId" pattern="[a-zA-Z1-9]+" placeholder="Ingrese numero de identificación"  required>
+                            <small *ngIf="!userId.valid && userId.touched" class="invalid-feedback d-block">
+                                El numero de identificacion no es valido
+                            </small>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Nombres</span>
+                            <input type="text" placeholder="Ingrese su nombre" name="nombres" type="text" id="name" #nombres="ngModel" [(ngModel)] = "user.nombres" required pattern="[a-zA-Z ]+">
+                            <small *ngIf="!nombres.valid && nombres.touched" class="invalid-feedback d-block">
+                                El nombre no es valido
+                            </small>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Apellidos</span>
+                            <input type="text" placeholder="Ingrese su apellido" name="apellidos" type="text" id="apellidos" #apellidos="ngModel" [(ngModel)] = "user.apellidos" required pattern="[a-zA-Z ]+">
+                            <small *ngIf="!apellidos.valid && apellidos.touched" class="invalid-feedback d-block">
+                                El apellido no es valido
+                            </small>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Dirección</span>
+                            <input type="text" placeholder="Ingrese su direccion" name="direccion" type="text" id="direccion" #direccion="ngModel" [(ngModel)] = "user.direccion" required pattern="^[a-zA-Z0-9#_- ]">
+                            <small *ngIf="!direccion.valid && direccion.touched" class="invalid-feedback d-block">
+                                El valor ingresado no es valido
+                            </small>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Correo Electronico</span>
+                            <input type="email" placeholder="Ingrese su email" name="correo_electronico" type="email" id="email" #correo_electronico="ngModel" [(ngModel)] = "user.correo_electronico" required pattern="^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6})*$">
+                            <small *ngIf="!correo_electronico.valid && correo_electronico.touched" class="invalid-feedback d-block">
+                                El correo electronico no es valido
+                            </small>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Telefono</span>
+                            <input type="number" placeholder="Ingrese su numero de telefono" name="telefono" type="number" id="telefono" #telefono="ngModel" [(ngModel)] = "user.telefono" required pattern="^\d+$">
+                            <small *ngIf="!telefono.valid && telefono.touched" class="invalid-feedback d-block">
+                                El telefono no es valido
+                            </small>
+                        </div>
+
+                        <div class="input-box">
+                            <span class="details">Celular</span>
+                            <input type="number" placeholder="Ingrese su numero de celular" name="celular" type="number" id="celular" #celular="ngModel" [(ngModel)] = "user.celular" required pattern="^\d+$">
+                            <small *ngIf="!celular.valid && celular.touched" class="invalid-feedback d-block">
+                                El celular no es valido
+                            </small>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Tipo de Identificación</span>
+                            <select name="tipo_Usuario" id="tipo_Usuario" #tipo_Usuario="ngModel" [(ngModel)] = "user.tipo_Usuario" required pattern="[1-4]">
+                                <option value="0" selected="selected">Seleccione un rol</option>
+                                <option value="1">Estudiante</option>
+                                <option value="2">Profesor</option>
+                                <option value="3">Administrador</option>
+                                <option value="4">Recepcionista</option>
+                            </select>
+                            <small *ngIf="!tipo_Usuario.valid && tipo_Usuario.touched" class="invalid-feedback d-block">
+                                Debe indicar el rol del usuario
+                            </small>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Contraseña</span>
+                            <input type="password" placeholder="Ingrese su contraseña" name="contrasena" type="password" id="contrasena" #contrasena="ngModel" [(ngModel)] = "user.contrasena" required pattern="(?=(.*[0-9]))(?=.*[\!@#$%^&*()\\[\]{}\-_+=~`|:;,./?])(?=.*[a-z])(?=(.*[A-Z]))(?=(.*)).{8,}">
+                            <small *ngIf="!contrasena.valid && contrasena.touched" class="invalid-feedback d-block">
+                                La contrasena ingresada no es valida
+                            </small>
+                        </div>
+                    </div>
+                    <div class="button">
+                        <input type="submit" value="Crear Usuario">
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </main>
+</div>

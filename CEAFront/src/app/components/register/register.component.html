@@ -5,7 +5,7 @@
     <div class="contentBx">
         <div class="formBx">
             <h2>Registrarme</h2>
-            <form action="" #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)">
+            <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)">
                 <div class="placement">
                 <div class="inputBx">
                     <span>Tipo de identificación</span>
@@ -23,7 +23,7 @@
                 
                     <div class="inputBx">
                         <span>Numero de Identificación</span>
-                        <input name="userId" id="userId" type="number" #userId="ngModel" [(ngModel)] = "user.userId" required pattern="[a-zA-Z1-9]+">
+                        <input name="userId" id="userId" type="text" #userId="ngModel" [(ngModel)] = "user.userId" required pattern="[a-zA-Z1-9]+">
                         <small *ngIf="!userId.valid && userId.touched" class="invalid-feedback d-block">
                             El numero de identificacion no es valido
                         </small>

@@ -18,12 +18,16 @@ class UserController extends Controller{
     }
 
     public function userRegister(Request $request){
-
         // Recopilacion de la informacion ingresada 
-        $jsonData = $request->input('json', null);
+        $jwtValidator = new \JwtAuth();
+        $tokenAuth = $request->header('Authorization');
+        $checkToken = $jwtValidator->checkToken($tokenAuth);
 
+        $jsonData = $request->input('json', null);
         $paramsObj = json_decode($jsonData); 
         $paramsArray = json_decode($jsonData, true);
+
+        return $paramsArray;
         
         $paramsArray = array_map('trim', $paramsArray);
 

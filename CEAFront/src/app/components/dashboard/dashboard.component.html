@@ -1,88 +1,86 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container-fluid">
-      <a
-        class="navbar-brand me-auto ms-lg-0 ms-3 text-uppercase fw-bold"
-        href="/"
-        >CEA</a
-      >
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topNavBar" aria-controls="topNavBar" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse justify-content-end" id="topNavBar">
-        <ul class="navbar-nav">
-          <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle ms-2"
-              href="#"
-              role="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              <i class="bi bi-person-fill"></i>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-end">
-              <li><a class="dropdown-item" href="#">Logout</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+<div class="contenedor">
 
-  <div class="container-fluid">
-    <div class="row jumbotron">
-        <div class="bg-light p-5 rounded-lg m-3">
-            <a class="jumbotron"href="/dashboard"><h1 class="display-4 text-center">Administration Dashboard</h1></a>
-            <p class="lead text-center">Here you can manage the content of the web site</p>
-        </div>
-    </div>
-    
-    <div class="row">
-      <div class="col-md-6 mb-3 w-100">
-        <div class="card h-100">
-          <div class="card-header">
-            <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
-            Edit Section
-          </div>
-          <div class="card-body">
-              <div class="container-fluid">
-              <!-- @yield('createImages')
-              @yield('updateWebC') -->
-              <table class="table table-dark table-striped mt-4 table-responsive">
-                <thead>
-                    <tr>
-                        <th scope="col">Imagen</th>
-                        <th scope="col">Titulo</th>
-                        <th scope="col">Descripción</th>
-                        <th scope="col">Lugar</th>
-                        <th scope="col">Slider Status</th>
-                        <th scope="col">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Prueba</td>
-                        <td>prueba</td>
-                        <td>prueba</td>
-                        <td>prueba</td>
-                        <td>En slider</td>
-                        <td>
-                            <form action="" method="post">
-                                <a class="btn btn-primary" href="">Edit Image</a>
-                                <button type="submit" class="btn btn-danger">Delete Image</button>
-                            </form>
-                        </td> 
-                    </tr>
-                </tbody>
-            </table>
-              </div>
-          </div>
+  <aside>
+    <div class="top">
+      <div class="logo">
+        <img src="assets/logo.png" alt="">
+        <h2>SGC <span class="danger">CEA</span></h2>
+        <div class="close" id="close-btn">
+          <span class="material-symbols-outlined">close</span>
         </div>
       </div>
     </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
-  <!-- <script src="{{ url('./js/jquery.dataTables.min.js') }}"></script>
-  <script src="{{ url('./js/dataTables.bootstrap5.min.js') }}"></script> -->
+    <div class="side-bar">
+      <a [routerLink]="['/dashboard']" class="active">
+        <span class="material-symbols-sharp">grid_view</span>
+        <h3>Panel de Control</h3>
+    </a>
+    <a [routerLink]="['/dashboard/users']">
+        <span class="material-symbols-sharp">manage_accounts</span>
+        <h3>Usuarios</h3>
+    </a>
+    <a [routerLink]="['/dashboard/newuser']">
+        <span class="material-symbols-sharp">add</span>
+        <h3>Nuevo Usuario</h3>
+    </a>
+    <a [routerLink]="['/dashboard/schedule']">
+        <span class="material-symbols-sharp">receipt_long</span>
+        <h3>Horarios</h3>
+    </a>
+    <a [routerLink]="['/dashboard/assistance']">
+        <span class="material-symbols-sharp">insights</span>
+        <h3>Asistencias</h3>
+    </a>
+    <a [routerLink]="['/dashboard/payments']">
+        <span class="material-symbols-sharp">inventory</span>
+        <h3>Pagos</h3>
+    </a>
+    <a [routerLink]="['/dashboard/users']">
+        <span class="material-symbols-sharp">report_gmailerrorred</span>
+        <h3>Informes</h3>
+    </a>
+    <a href="#">
+        <span class="material-symbols-sharp">settings</span>
+        <h3>Configuracion</h3>
+    </a>
 
- 
+    <a [routerLink]="['/login']">
+        <span class="material-symbols-sharp">logout</span>
+        <h3>Cerrar Sesión</h3>
+    </a>
+    </div>
+  </aside>
+
+  <main>
+    <h1>Panel de Control</h1>
+    <div class="container mt-3">
+      <div class="mt-4 p-5 jumbotron text-white rounded">
+        <h1>Bienvenido <span>Nicolas!</span></h1>
+        <h2>Estamos muy felices de verte de nuevo</h2>
+        <p></p> 
+      </div>
+    </div>
+    <!-- <div class="date">
+      <input type="date" class="form-control">
+    </div> -->
+
+    <div class="insights">
+      <div class="sales">
+        <span class="material-symbols-sharp">analytics</span>
+        <div class="middle">
+          
+        </div>
+      </div>
+
+      <div class="sales">
+        <span class="material-symbols-sharp">analytics</span>
+        <div class="middle">
+          
+        </div>
+      </div>
+      
+    </div>
+
+  </main>
+</div>

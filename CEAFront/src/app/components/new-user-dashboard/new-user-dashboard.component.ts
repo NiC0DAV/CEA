@@ -1,27 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../models/usuario';
-import { UserService } from '../../services/user.service';
+import { UserService } from '../../services/user.service'; 
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css'],
-  providers: [UserService]
+  selector: 'app-new-user-dashboard',
+  templateUrl: './new-user-dashboard.component.html',
+  styleUrls: ['./new-user-dashboard.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class NewUserDashboardComponent implements OnInit {
 
   public user: User;
   public status: string;
   public token;
 
-  constructor( private _userService: UserService ) {
+  constructor(private _userService: UserService) { 
     this.user = new User('', '', '', '', '', '', '', '', '', '', 'AX106154');
-    this.status = '';
     this.token = this._userService.getToken();
   }
 
   ngOnInit(): void {
-
   }
 
   onSubmit(form: any) {
@@ -31,7 +28,7 @@ export class RegisterComponent implements OnInit {
         console.log(response);
         if (response.status == 'Success') {
           this.status = response.status;
-          form.reset();
+          // form.reset();
         } else {
           this.status = 'Error';
         }

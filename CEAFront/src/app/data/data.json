@@ -1,0 +1,17 @@
+{
+    "data": [
+        {
+            "id": 2,
+            "userId": "AX106154",
+            "tipo_documento": "1",
+            "nombres": "Anel Cristel",
+            "apellidos": "Gomez Martinez",
+            "direccion": "Acapulco",
+            "correo_electronico": "anel_cris11@hotmail.com",
+            "telefono": 3507156518,
+            "celular": 3507156518,
+            "tipo_usuario": "1",
+            "ultima_act": "AX106154"
+        }
+    ]
+}
