@@ -16,11 +16,11 @@
                 <span class="material-symbols-sharp">grid_view</span>
                 <h3>Panel de Control</h3>
             </a>
-            <a [routerLink]="['/dashboard/users']">
+            <a [routerLink]="['/dashboard/users']" class="active">
                 <span class="material-symbols-sharp">manage_accounts</span>
                 <h3>Usuarios</h3>
             </a>
-            <a [routerLink]="['/dashboard/newuser']" class="active">
+            <a [routerLink]="['/dashboard/newuser']">
                 <span class="material-symbols-sharp">add</span>
                 <h3>Nuevo Usuario</h3>
             </a>
@@ -60,7 +60,7 @@
                     <div class="user-details">
                         <div class="input-box">
                             <span class="details">Tipo de Identificación</span>
-                            <select name="tipo_documento" id="tipo_documento" #tipo_documento="ngModel" [(ngModel)] = "user.tipo_documento" required pattern="[1-4]">
+                            <select disabled name="tipo_documento" id="tipo_documento" #tipo_documento="ngModel" [(ngModel)] = "user.tipo_documento" required pattern="[1-4]">
                                 <option value="0" selected>Seleccione un Tipo de Identificación</option>
                                 <option value="1">Cedula de Ciudadania</option>
                                 <option value="2">Tarjeta de Identidad</option>
@@ -72,15 +72,15 @@
                             </small>
                         </div>
                         <div class="input-box">
-                            <span class="details">Numero de Identificación</span>
-                            <input type="text" name="userId" id="userId" #userId="ngModel" [(ngModel)] = "user.userId" pattern="[a-zA-Z1-9]+" placeholder="Ingrese numero de identificación"  required>
+                            <span  class="details">Numero de Identificación</span>
+                            <input disabled type="text" name="userId" id="userId" #userId="ngModel" [(ngModel)] = "user.userId" pattern="[a-zA-Z1-9]+" placeholder="Ingrese numero de identificación"  required>
                             <small *ngIf="!userId.valid && userId.touched" class="invalid-feedback d-block">
                                 El numero de identificacion no es valido
                             </small>
                         </div>
                         <div class="input-box">
                             <span class="details">Nombres</span>
-                            <input type="text" placeholder="Ingrese su nombre" name="nombres" type="text" id="name" #nombres="ngModel" [(ngModel)] = "user.nombres" required pattern="[a-zA-Z ]+">
+                            <input type="text" name="nombres"  id="nombres" #nombres="ngModel" [(ngModel)] = "user.nombres" pattern="[a-zA-Z ]+" placeholder="Ingrese su nombre" required >
                             <small *ngIf="!nombres.valid && nombres.touched" class="invalid-feedback d-block">
                                 El nombre no es valido
                             </small>
@@ -135,8 +135,8 @@
                             </small>
                         </div>
                         <div class="input-box">
-                            <span class="details">Contraseña</span>
-                            <input type="password" placeholder="Ingrese su contraseña" name="contrasena" type="password" id="contrasena" #contrasena="ngModel" [(ngModel)] = "user.contrasena" required pattern="(?=(.*[0-9]))(?=.*[\!@#$%^&*()\\[\]{}\-_+=~`|:;,./?])(?=.*[a-z])(?=(.*[A-Z]))(?=(.*)).{8,}">
+                            <span  class="details">Contraseña</span>
+                            <input disabled type="password" placeholder="Ingrese su contraseña" name="contrasena" type="password" id="contrasena" #contrasena="ngModel" [(ngModel)] = "user.contrasena" required pattern="(?=(.*[0-9]))(?=.*[\!@#$%^&*()\\[\]{}\-_+=~`|:;,./?])(?=.*[a-z])(?=(.*[A-Z]))(?=(.*)).{8,}">
                             <small *ngIf="!contrasena.valid && contrasena.touched" class="invalid-feedback d-block">
                                 La contrasena ingresada no es valida
                             </small>

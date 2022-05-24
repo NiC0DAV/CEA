@@ -14,6 +14,7 @@ import { ScheduleComponent } from './components/schedule/schedule.component';
 import { AssistanceComponent } from './components/assistance/assistance.component';
 import { PaymentsComponent } from './components/payments/payments.component';
 import { DataTablesModule } from "angular-datatables";
+import { UserEditDashboardComponent } from './components/user-edit-dashboard/user-edit-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { DataTablesModule } from "angular-datatables";
     NewUserDashboardComponent,
     ScheduleComponent,
     AssistanceComponent,
-    PaymentsComponent
+    PaymentsComponent,
+    UserEditDashboardComponent
   ],
   imports: [
     BrowserModule,

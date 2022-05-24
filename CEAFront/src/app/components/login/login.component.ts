@@ -18,14 +18,20 @@ export class LoginComponent implements OnInit {
   public token;
   public identity;
   public errorMessage: string;
+  public validate;
 
   constructor(private _userService: UserService, private _router: Router, private _route: ActivatedRoute) {
 
     this.user = new User('', '', '', '', '', '', '', '', '', '', '');
-
+    this.validate = _userService.getIdentity();
   }
 
   ngOnInit(): void {
+    this.logout();
+
+    if(this.validate != null){
+      this._router.navigate(['/dashboard']);
+    }
   }
 
   onSubmit(form: any) {
@@ -39,8 +45,8 @@ export class LoginComponent implements OnInit {
             response => {
               this.identity = response;
               console.log('Token '+this.token);
-              console.log('Identity '+this.identity);
               localStorage.setItem('Token', this.token);
+              localStorage.setItem('Identity', JSON.stringify(this.identity));
 
               this._router.navigate(['/dashboard']);
             },
@@ -60,6 +66,23 @@ export class LoginComponent implements OnInit {
         console.log(<any>error);
       }
     )
+  }
+
+  logout(){
+    this._route.params.subscribe(params => {
+      let logout = +params['sure'];
+
+      if(logout == 1){
+        localStorage.clear();
+        this.identity = null;
+        this.token = null;
+        this.validate = null;
+
+        this._router.navigate(['']);
+      }else{
+        console.log("Error")
+      }
+    });
   }
 
 }

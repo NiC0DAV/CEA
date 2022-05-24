@@ -36,27 +36,23 @@
         <span class="material-symbols-sharp">inventory</span>
         <h3>Pagos</h3>
     </a>
-    <a [routerLink]="['/dashboard/users']">
+    <!-- <a [routerLink]="['/dashboard/users']">
         <span class="material-symbols-sharp">report_gmailerrorred</span>
         <h3>Informes</h3>
-    </a>
-    <a href="#">
-        <span class="material-symbols-sharp">settings</span>
-        <h3>Configuracion</h3>
-    </a>
+    </a> -->
 
-    <a [routerLink]="['/login']">
+    <a [routerLink]="['/logout/1']">
         <span class="material-symbols-sharp">logout</span>
         <h3>Cerrar Sesión</h3>
     </a>
     </div>
-  </aside>
+  </aside> 
 
   <main>
     <h1>Panel de Control</h1>
     <div class="container mt-3">
       <div class="mt-4 p-5 jumbotron text-white rounded">
-        <h1>Bienvenido <span>Nicolas!</span></h1>
+        <h1>Bienvenido/a &nbsp;<span>{{ identity.nombres }}</span></h1>
         <h2>Estamos muy felices de verte de nuevo</h2>
         <p></p> 
       </div>

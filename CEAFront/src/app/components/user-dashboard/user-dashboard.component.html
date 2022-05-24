@@ -60,6 +60,11 @@
     <main>
         <h1>Control de Usuarios</h1>
         <div class="container tables">
+            <div class="inputBx">
+                <div class="alert alert-success mb-2 text-center" *ngIf="status == 'Success'">
+                    Usuario eliminado exitosamente
+                </div>
+            </div>
             <table class="">
                 <thead>
                   <tr>
@@ -75,54 +80,17 @@
                   </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>11934561958</td>
-                        <td>Nicolas</td>
-                        <td>Estevez</td>
-                        <td>Cll180</td>
-                        <td>estevez@mail.com</td>
-                        <td>3190878390</td>
-                        <td>3190878390</td>
-                        <td>Anel</td>
-                        <td><input type="submit" class="btn btn-danger" value="Eliminar Usuario"> <br><input type="submit" class="btn btn-primary mt-2 mb-1" value="Editar Usuario"></td>
-                    </tr>
-
-                    <tr>
-                        <td>11934561958</td>
-                        <td>Nicolas</td>
-                        <td>Estevez</td>
-                        <td>Cll180</td>
-                        <td>estevez@mail.com</td>
-                        <td>3190878390</td>
-                        <td>3190878390</td>
-                        <td>Anel</td>
-                        <td><input type="submit" class="btn btn-danger" value="Eliminar Usuario"> <br><input type="submit" class="btn btn-primary mt-2 mb-1" value="Editar Usuario"></td>
-                    </tr>
-
-                    <tr>
-                        <td>11934561958</td>
-                        <td>Nicolas</td>
-                        <td>Estevez</td>
-                        <td>Cll180</td>
-                        <td>estevez@mail.com</td>
-                        <td>3190878390</td>
-                        <td>3190878390</td>
-                        <td>Anel</td>
-                        <td><input type="submit" class="btn btn-danger" value="Eliminar Usuario"> <br><input type="submit" class="btn btn-primary mt-2 mb-1" value="Editar Usuario"></td>
-                    </tr>
-
-                    <tr>
-                        <td>11934561958</td>
-                        <td>Nicolas</td>
-                        <td>Estevez</td>
-                        <td>Cll180</td>
-                        <td>estevez@mail.com</td>
-                        <td>3190878390</td>
-                        <td>3190878390</td>
-                        <td>Anel</td>
-                        <td><input type="submit" class="btn btn-danger" value="Eliminar Usuario"> <br><input type="submit" class="btn btn-primary mt-2 mb-1" value="Editar Usuario"></td>
-                    </tr>
-                    
+                    <tr *ngFor="let user of users">
+                        <td>{{ user.userId }}</td>
+                        <td>{{ user.nombres }}</td>
+                        <td>{{ user.apellidos }}</td>
+                        <td>{{ user.direccion }}</td>
+                        <td>{{ user.correo_electronico }}</td>
+                        <td>{{ user.telefono }}</td>
+                        <td>{{ user.celular }}</td>
+                        <td>{{ user.ultima_act }}</td>
+                        <td><a (click)="deletePost(user.userId);" class="btn btn-danger" >Eliminar Usuario</a> <br> <a [routerLink]="['/dashboard/useredit', user.userId]" class="btn btn-primary mt-2 mb-1" >Editar Usuario</a></td>
+                    </tr>                    
                     
                 </tbody>
               </table>              

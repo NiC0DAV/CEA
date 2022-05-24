@@ -9,7 +9,7 @@ export class User{
         public contrasena: string,
         public telefono: string,
         public celular: string, 
-        public tipo_Usuario: string,
+        public tipo_usuario: any,
         public ultima_act: string
     ){
 
