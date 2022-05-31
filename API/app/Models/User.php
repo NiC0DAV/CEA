@@ -28,7 +28,7 @@ class User extends Authenticatable
         'contrasena',
         'telefono',
         'celular',
-        'tipo_Usuario',
+        'tipo_usuario',
         'ultima_act'
     ];
 

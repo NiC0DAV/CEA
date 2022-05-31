@@ -36,16 +36,8 @@
                 <span class="material-symbols-sharp">inventory</span>
                 <h3>Pagos</h3>
             </a>
-            <a [routerLink]="['/dashboard/users']">
-                <span class="material-symbols-sharp">report_gmailerrorred</span>
-                <h3>Informes</h3>
-            </a>
-            <a href="#">
-                <span class="material-symbols-sharp">settings</span>
-                <h3>Configuracion</h3>
-            </a>
 
-            <a [routerLink]="['/login']">
+            <a [routerLink]="['/logout/1']">
                 <span class="material-symbols-sharp">logout</span>
                 <h3>Cerrar Sesión</h3>
             </a>
@@ -73,7 +65,7 @@
                         </div>
                         <div class="input-box">
                             <span class="details">Numero de Identificación</span>
-                            <input type="text" name="userId" id="userId" #userId="ngModel" [(ngModel)] = "user.userId" pattern="[a-zA-Z1-9]+" placeholder="Ingrese numero de identificación"  required>
+                            <input type="text" name="userId" id="userId" #userId="ngModel" [(ngModel)] = "user.userId" pattern="[a-zA-Z0-9]+" placeholder="Ingrese numero de identificación"  required>
                             <small *ngIf="!userId.valid && userId.touched" class="invalid-feedback d-block">
                                 El numero de identificacion no es valido
                             </small>
@@ -142,10 +134,10 @@
                             </small>
                         </div>
                     </div>
+                    <div class="alert alert-success mb-2 text-center" *ngIf="status == 'success'">
+                        Usuario creado exitosamente
+                    </div>
                     <div class="button">
-                        <div class="alert alert-success mb-2 text-center" *ngIf="status == 'success'">
-                            Usuario creado exitosamente
-                        </div>
                         <input type="submit" value="Crear Usuario">
                     </div>
                 </form>

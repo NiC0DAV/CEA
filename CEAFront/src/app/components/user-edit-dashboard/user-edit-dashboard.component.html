@@ -36,16 +36,8 @@
                 <span class="material-symbols-sharp">inventory</span>
                 <h3>Pagos</h3>
             </a>
-            <a [routerLink]="['/dashboard/users']">
-                <span class="material-symbols-sharp">report_gmailerrorred</span>
-                <h3>Informes</h3>
-            </a>
-            <a href="#">
-                <span class="material-symbols-sharp">settings</span>
-                <h3>Configuracion</h3>
-            </a>
 
-            <a [routerLink]="['/login']">
+            <a [routerLink]="['/logout/1']">
                 <span class="material-symbols-sharp">logout</span>
                 <h3>Cerrar Sesión</h3>
             </a>
@@ -142,11 +134,11 @@
                             </small>
                         </div>
                     </div>
+                    <div class="alert alert-success mb-2 text-center" *ngIf="status == 'success'">
+                        Usuario creado exitosamente
+                    </div>
                     <div class="button">
-                        <div class="alert alert-success mb-2 text-center" *ngIf="status == 'success'">
-                            Usuario creado exitosamente
-                        </div>
-                        <input type="submit" value="Crear Usuario">
+                        <input type="submit" value="Editar Usuario">
                     </div>
                 </form>
             </div>

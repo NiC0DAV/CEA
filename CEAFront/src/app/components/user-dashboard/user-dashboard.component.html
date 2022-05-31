@@ -36,24 +36,17 @@
                 <span class="material-symbols-sharp">inventory</span>
                 <h3>Pagos</h3>
             </a>
-            <a [routerLink]="['/dashboard/users']">
-                <span class="material-symbols-sharp">report_gmailerrorred</span>
-                <h3>Informes</h3>
-            </a>
-            <a href="#">
-                <span class="material-symbols-sharp">settings</span>
-                <h3>Configuracion</h3>
-            </a>
+
             <!-- <a href="#">
           <span class="material-symbols-sharp">chat</span>
           <h3>Messages</h3>
           <span class="message-count">26</span>
         </a> -->
 
-            <a [routerLink]="['/']">
-                <span class="material-symbols-sharp">logout</span>
-                <h3>Cerrar Sesión</h3>
-            </a>
+        <a [routerLink]="['/logout/1']">
+            <span class="material-symbols-sharp">logout</span>
+            <h3>Cerrar Sesión</h3>
+        </a>
         </div>
     </aside>
 
@@ -62,7 +55,13 @@
         <div class="container tables">
             <div class="inputBx">
                 <div class="alert alert-success mb-2 text-center" *ngIf="status == 'Success'">
-                    Usuario eliminado exitosamente
+                    <h1>Usuario eliminado exitosamente</h1>
+                </div>
+                <div class="alert alert-primary mb-2 text-center" *ngIf="!users">
+                    <h1>Cargando...</h1>
+                </div>
+                <div class="alert alert-danger mb-2 text-center" *ngIf="status == 'Error'">
+                    <h1>El usuario no ha podido ser borrado o ya esta en uso</h1>
                 </div>
             </div>
             <table class="">
@@ -89,7 +88,7 @@
                         <td>{{ user.telefono }}</td>
                         <td>{{ user.celular }}</td>
                         <td>{{ user.ultima_act }}</td>
-                        <td><a (click)="deletePost(user.userId);" class="btn btn-danger" >Eliminar Usuario</a> <br> <a [routerLink]="['/dashboard/useredit', user.userId]" class="btn btn-primary mt-2 mb-1" >Editar Usuario</a></td>
+                        <td><a (click)="deletePost(user.userId);" class="btn btn-danger" *ngIf="user.userId != identity.userId">Eliminar Usuario</a> <br> <a [routerLink]="['/dashboard/useredit', user.userId]" class="btn btn-primary mt-2 mb-1" >Editar Usuario</a></td>
                     </tr>                    
                     
                 </tbody>

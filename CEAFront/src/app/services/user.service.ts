@@ -60,6 +60,7 @@ export class UserService {
         let json = JSON.stringify(user);
         let params = "json="+json;
         let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded').set('Authorization', token);
+        console.log(params);
 
         return this._http.put(this.url+'/dashboard/users/edit/' + id, params, { headers: headers });
 

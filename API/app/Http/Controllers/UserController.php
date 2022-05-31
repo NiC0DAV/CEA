@@ -8,13 +8,21 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller{
 
-    public function fetchUser(Request $request){
+    public function fetchUser(){
+        // $jwtValidator = new \JwtAuth();
+        // $tokenAuth = $request->header('Authorization');
+
+        $name = User::select('nombres')->where('userId', 'ultima_act');
 
         $users = User::select
         ('id','userId', 'tipo_documento', 'nombres', 'apellidos', 'direccion', 'correo_electronico', 'telefono', 'celular', 'tipo_usuario', 'ultima_act')
         ->get();
 
-        return $users;
+        return response ()->json([
+            'code' => 200,
+            'status' => 'success',
+            'users' => $users
+        ],200);
     }
 
     public function userRegister(Request $request){
@@ -26,8 +34,6 @@ class UserController extends Controller{
         $jsonData = $request->input('json', null);
         $paramsObj = json_decode($jsonData); 
         $paramsArray = json_decode($jsonData, true);
-
-        return $paramsArray;
         
         $paramsArray = array_map('trim', $paramsArray);
 
@@ -77,7 +83,7 @@ class UserController extends Controller{
                     $user->save();
 
                     $data = array(
-                        'status' => 'Success',
+                        'status' => 'success',
                         'code' => 200,
                         'message' => 'El usuario se ha creado correctamente',
                         'user' => $user
@@ -156,7 +162,7 @@ class UserController extends Controller{
                 'telefono' => ['required', 'numeric|max:15'],
                 'celular' => ['required', 'numeric|max:15'],
                 'tipo_usuario' => ['numeric'],
-                'ultima_act' => ['required','alpha']
+                'ultima_act' => ['required']
             ]);
 
             unset($paramsArray['userId']);
@@ -201,8 +207,8 @@ class UserController extends Controller{
 
     public function userDelete(Request $request, $id){
 
-        $tokenAuth = $request->header('Authorization');
         $jwtValidator = new \JwtAuth();
+        $tokenAuth = $request->header('Authorization');
         $checkToken = $jwtValidator->checkToken($tokenAuth);
 
         if($checkToken){
@@ -230,6 +236,19 @@ class UserController extends Controller{
         }
 
         return response()->json($data, $data['code']);
+    }
+
+    public function unicUser($id){
+
+        $user = User::select
+        ('id','userId', 'tipo_documento', 'nombres', 'apellidos', 'direccion', 'correo_electronico', 'telefono', 'celular', 'tipo_usuario', 'ultima_act', 'contrasena')
+        ->where('userId', $id)
+        ->first();
+
+        return response()->json([
+            'status' => 'success',
+            'user' => $user
+        ], 200);
     }
 
 }

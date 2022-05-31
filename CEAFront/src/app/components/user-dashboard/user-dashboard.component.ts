@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, DoCheck } from '@angular/core';
 import { User } from '../../models/usuario';
 import { UserService } from '../../services/user.service'; 
 import { Router, ActivatedRoute, Params } from '@angular/router';
@@ -11,19 +11,19 @@ import { global } from '../../services/global';
   styleUrls: ['./user-dashboard.component.css'],
   providers: [UserService]
 })
-export class UserDashboardComponent implements OnInit {
+export class UserDashboardComponent implements OnInit, DoCheck {
 
   public identity;
   public url;
   public users: Array<User>;
   public status;
   public token;
+  public message;
 
   constructor(
     public _userService: UserService, private _router: Router, private _route: ActivatedRoute
   ){
-    this.identity = _userService.getIdentity();
-    this.token = this._userService.getToken();
+    this.loadUser();
     this.url = global.url;
   } 
 
@@ -33,6 +33,15 @@ export class UserDashboardComponent implements OnInit {
     }
 
     this.getUsers();
+  }
+
+  ngDoCheck(){
+    this.loadUser();
+  }
+
+  loadUser(){
+    this.identity = this._userService.getIdentity();
+    this.token = this._userService.getToken();
   }
 
   getUsers(){
@@ -57,6 +66,7 @@ export class UserDashboardComponent implements OnInit {
       },
       error => {
         console.log(<any>error);
+        this.status = "Error"
       }
     )
   }
