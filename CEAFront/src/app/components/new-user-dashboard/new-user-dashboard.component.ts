@@ -16,6 +16,10 @@ export class NewUserDashboardComponent implements OnInit, DoCheck {
   public status: string;
   public token;
   public identity;
+  public tokenExpDateFormat: any;
+  public todayFormatDate: Date;
+  public unixFormatDate: number;
+  public timePassed: number;
   // public message;
 
   constructor(private _userService: UserService, private _router: Router, private _route: ActivatedRoute) { 
@@ -62,5 +66,18 @@ export class NewUserDashboardComponent implements OnInit, DoCheck {
 
     // form.reset();
   }
+
+  tokenExp(){
+    this.timePassed = Date.now();
+    this.todayFormatDate = new Date(this.timePassed);
+    this.unixFormatDate = (Math.trunc(this.todayFormatDate.getTime() / 1000));
+
+    if(this.unixFormatDate >= this.identity.exp){
+      // console.log('Expirado');
+      alert('Su sesion ha expirado, inicie sesion nuevamente');
+      this._router.navigate(['/logout/1']);
+    }
+  }
+
 
 }

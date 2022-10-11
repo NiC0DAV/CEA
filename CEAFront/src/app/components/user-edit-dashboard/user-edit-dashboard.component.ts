@@ -14,9 +14,9 @@ export class UserEditDashboardComponent implements OnInit, DoCheck {
 
   public user: User;
   public status: string;
-  public token;
-  public identity;
-  public id;
+  public token: any;
+  public identity: any;
+  public id :any;
 
   constructor(private _userService: UserService, private _router: Router, private _route: ActivatedRoute) {
     this.loadUser();

@@ -27,7 +27,7 @@ import { UserEditDashboardComponent } from './components/user-edit-dashboard/use
     ScheduleComponent,
     AssistanceComponent,
     PaymentsComponent,
-    UserEditDashboardComponent
+    UserEditDashboardComponent,
   ],
   imports: [
     BrowserModule,

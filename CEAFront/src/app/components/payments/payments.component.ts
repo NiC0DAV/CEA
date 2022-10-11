@@ -13,7 +13,11 @@ export class PaymentsComponent implements OnInit {
 
   public token;
   public identity;
-
+  public tokenExpDateFormat: any;
+  public todayFormatDate: Date;
+  public unixFormatDate: number;
+  public timePassed: number;
+  
   constructor(
     public _userService: UserService, private _router: Router, private _route: ActivatedRoute
   ){

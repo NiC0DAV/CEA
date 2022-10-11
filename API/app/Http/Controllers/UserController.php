@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
+use App\Helpers\JwtAuth;
 
 class UserController extends Controller{
 
@@ -27,7 +28,7 @@ class UserController extends Controller{
 
     public function userRegister(Request $request){
         // Recopilacion de la informacion ingresada 
-        $jwtValidator = new \JwtAuth();
+        $jwtValidator = new JwtAuth();
         $tokenAuth = $request->header('Authorization');
         $checkToken = $jwtValidator->checkToken($tokenAuth);
 
@@ -39,7 +40,7 @@ class UserController extends Controller{
 
         if(!empty($paramsArray) && !empty($paramsObj)){
 
-            	$validateData = \Validator::make($paramsArray,[
+            	$validateData = Validator::make($paramsArray,[
                     'userId' => ['required', 'unique:users'],
                     'tipo_documento' => ['required'],
                     'nombres' => ['required'],
@@ -106,7 +107,7 @@ class UserController extends Controller{
     }
 
     public function userLogin(Request $request){
-        $jwtValidator = new \JwtAuth();
+        $jwtValidator = new JwtAuth();
 
         $jsonData = $request->input('json', null);
 
@@ -145,7 +146,7 @@ class UserController extends Controller{
     public function userEdit(Request $request, $id){
         $tokenAuth = $request->header('Authorization');
 
-        $jwtValidator = new \JwtAuth();
+        $jwtValidator = new JwtAuth();
         $checkToken = $jwtValidator->checkToken($tokenAuth);
 
         $jsonData = $request->input('json', null);
@@ -154,7 +155,7 @@ class UserController extends Controller{
         if($checkToken){
             $userCheck = $jwtValidator->checkToken($tokenAuth, true);
             
-            $validate = \Validator::make($paramsArray, [
+            $validate = Validator::make($paramsArray, [
                 'nombres' => ['required','alpha'],
                 'apellidos' => ['required', 'alpha'],
                 'direccion' => ['required', 'alpha'],
@@ -207,7 +208,7 @@ class UserController extends Controller{
 
     public function userDelete(Request $request, $id){
 
-        $jwtValidator = new \JwtAuth();
+        $jwtValidator = new JwtAuth();
         $tokenAuth = $request->header('Authorization');
         $checkToken = $jwtValidator->checkToken($tokenAuth);
 

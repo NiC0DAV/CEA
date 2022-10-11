@@ -24,7 +24,6 @@ export class UserDashboardComponent implements OnInit, DoCheck {
     public _userService: UserService, private _router: Router, private _route: ActivatedRoute
   ){
     this.loadUser();
-    this.url = global.url;
   } 
 
   ngOnInit(): void {
