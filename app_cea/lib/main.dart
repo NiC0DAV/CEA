@@ -1,6 +1,6 @@
-import 'package:app_cea/src/home/home_page.dart';
-import 'package:app_cea/src/login/login_page.dart';
-import 'package:app_cea/src/register/register_page.dart';
+import 'package:app_cea/src/pages/home/home_page.dart';
+import 'package:app_cea/src/pages/login/login_page.dart';
+import 'package:app_cea/src/pages/register/register_page.dart';
 import 'package:app_cea/src/utils/my_colors.dart';
 import 'package:flutter/material.dart';
 

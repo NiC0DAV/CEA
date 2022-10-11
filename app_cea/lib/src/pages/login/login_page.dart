@@ -1,4 +1,5 @@
-import 'package:app_cea/src/login/login_controller.dart';
+
+import 'package:app_cea/src/pages/login/login_controller.dart';
 import 'package:app_cea/src/utils/my_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';

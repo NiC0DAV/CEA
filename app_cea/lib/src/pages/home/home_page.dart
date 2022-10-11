@@ -1,4 +1,5 @@
-import 'package:app_cea/src/custom_app_bar/custom_app_bar.dart';
+
+import 'package:app_cea/src/pages/custom_app_bar/custom_app_bar.dart';
 import 'package:app_cea/src/utils/custom_elements.dart';
 import 'package:app_cea/src/utils/my_colors.dart';
 import 'package:flutter/material.dart';

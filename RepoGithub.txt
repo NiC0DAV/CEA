@@ -1,1 +1,1 @@
-https://github.com/NiC0DAV/CEA
+https://github.com/NiC0DAV/CEA/tree/master/app_cea
