@@ -1,3 +1,3 @@
 class Environment {
-  static const String API_DELIVERY = "127.0.0.1:3000";
+  static const String API_CEA = "192.168.20.34:8000";
 }

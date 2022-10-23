@@ -1,3 +1,7 @@
+// To parse this JSON data, do
+//
+//     final user = userFromJson(jsonString);
+
 import 'dart:convert';
 
 User userFromJson(String str) => User.fromJson(json.decode(str));
@@ -6,45 +10,61 @@ String userToJson(User data) => json.encode(data.toJson());
 
 class User {
 
-  String? id;
-  String? namer;
-  String? lastname;
-  String? email;
-  String? phone;
-  String? password;
-  String? sessionToken;
-  String? image;
+  String? userId;
+  String? tipoDocumento;
+  String? nombres;
+  String? apellidos;
+  String? direccion;
+  String? correoElectronico;
+  String? contrasena;
+  int? telefono;
+  int? celular;
+  String? tipoUsuario;
+  DateTime? createdAt;
+  DateTime? updatedAt;
 
   User({
-    this.id,
-    this.namer,
-    this.lastname,
-    this.email,
-    this.phone,
-    this.password,
-    this.sessionToken,
-    this.image,
+    this.userId,
+    this.tipoDocumento,
+    this.nombres,
+    this.apellidos,
+    this.direccion,
+    this.correoElectronico,
+    this.contrasena,
+    this.telefono,
+    this.celular,
+    this.tipoUsuario,
+    this.createdAt,
+    this.updatedAt,
   });
 
   factory User.fromJson(Map<String, dynamic> json) => User(
-    id: json["id"],
-    namer: json["namer"],
-    lastname: json["lastname"],
-    email: json["email"],
-    phone: json["phone"],
-    password: json["password"],
-    sessionToken: json["session_token"],
-    image: json["image"],
+    userId: json["userId"],
+    tipoDocumento: json["tipo_documento"],
+    nombres: json["nombres"],
+    apellidos: json["apellidos"],
+    direccion: json["direccion"],
+    correoElectronico: json["correo_electronico"],
+    contrasena: json["contrasena"],
+    telefono: json["telefono"],
+    celular: json["celular"],
+    tipoUsuario: json["tipo_usuario"],
+    createdAt: DateTime.parse(json["created_at"]),
+    updatedAt: DateTime.parse(json["updated_at"]),
   );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "namer": namer,
-    "lastname": lastname,
-    "email": email,
-    "phone": phone,
-    "password": password,
-    "session_token": sessionToken,
-    "image": image,
+    "userId": userId,
+    "tipo_documento": tipoDocumento,
+    "nombres": nombres,
+    "apellidos": apellidos,
+    "direccion": direccion,
+    "correo_electronico": correoElectronico,
+    "contrasena": contrasena,
+    "telefono": telefono,
+    "celular": celular,
+    "tipo_usuario": tipoUsuario,
+    "created_at": createdAt?.toIso8601String(),
+    "updated_at": updatedAt?.toIso8601String(),
   };
 }

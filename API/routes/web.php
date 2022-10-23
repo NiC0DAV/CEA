@@ -16,17 +16,14 @@ use App\Http\Middleware\ApiAuthMiddleware;
 |
 */
 
-Route::Post('api/login', [UserController::class, 'userLogin']);
+Route::Post('api/users/login', [UserController::class, 'userLogin']);
 
-Route::Get('api/dashboard/users', [UserController::class, 'fetchUser']);
+Route::Get('api/users/dashboard/users', [UserController::class, 'fetchUser']);
 
-Route::Post('api/dashboard/users/register', [UserController::class, 'userRegister'])->middleware(ApiAuthMiddleware::class);
+Route::Post('api/users/dashboard/users/register', [UserController::class, 'userRegister'])->middleware(ApiAuthMiddleware::class);
 
-Route::Put('api/dashboard/users/edit/{id}', [UserController::class, 'userEdit'])->middleware(ApiAuthMiddleware::class);
+Route::Put('api/users/dashboard/users/edit/{id}', [UserController::class, 'userEdit'])->middleware(ApiAuthMiddleware::class);
 
-Route::Delete('api/dashboard/users/delete/{id}', [UserController::class, 'userDelete'])->middleware(ApiAuthMiddleware::class);
+Route::Delete('api/users/dashboard/users/delete/{id}', [UserController::class, 'userDelete'])->middleware(ApiAuthMiddleware::class);
 
-Route::Get('api/dashboard/unicuser/{id}', [UserController::class, 'unicUser']);
-
-
-
+Route::Get('api/users/dashboard/unicuser/{id}', [UserController::class, 'unicUser'])->middleware(ApiAuthMiddleware::class);

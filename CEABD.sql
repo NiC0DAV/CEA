@@ -1,10 +1,12 @@
 create database CEA;
 USE CEA;
 
-CREATE TABLE Usuario (ID bigint AUTO_INCREMENT UNIQUE ,Documento varchar(250) NOT NULL, Tipo_Documento Char(1) NOT NULL, Nombres varchar(250)NOT NULL, Apellidos varchar(250)NOT NULL, Direccion varchar(250) NOT NULL, Corre_Electronico varchar(250) NOT NULL, Telefono Bigint NOT NULL, Celular Bigint NOT NULL, Tipo_Usuario Char(1) NOT NULL, ContraseÃ±a char(15) NOT NULL, Huella binary NOT NULL, Ultima_Act varchar(250) NOT NULL
-                       ,primary key (Documento), foreign key (Ultima_Act) references Usuario(Documento));
+DROP TABLE USERS;
 
-CREATE TABLE Doc_Aprendiz (ID bigint AUTO_INCREMENT, NumDoc_Aprendiz varchar(250) NOT NULL, Doc_Soporte varchar(250) NOT NULL, EstadoProcesoAcademico char(1) NOT NULL
+CREATE TABLE users (ID bigint AUTO_INCREMENT UNIQUE ,userId varchar(250) NOT NULL, Tipo_Documento Char(1) NOT NULL, Nombres varchar(250)NOT NULL, Apellidos varchar(250)NOT NULL, Direccion varchar(250) NOT NULL, correo_electronico varchar(250) NOT NULL, Telefono Bigint NOT NULL, Celular Bigint NOT NULL, Tipo_Usuario Char(1) NOT NULL, Contrasena varchar(255) NOT NULL, Huella binary NOT NULL, Ultima_Act varchar(250) NOT NULL, created_at datetime, updated_at datetime
+                       ,primary key (userId), foreign key (Ultima_Act) references users(userId));
+
+CREATE TABLE Doc_Aprendiz (ID bigint AUTO_INCREMENT, userId varchar(250) NOT NULL, Doc_Soporte varchar(250) NOT NULL, EstadoProcesoAcademico char(1) NOT NULL
                        ,primary key (ID), foreign key (NumDoc_Aprendiz) references Usuario(Documento));                       
  
 CREATE TABLE Pago_Aprendiz (ID bigint AUTO_INCREMENT, NumDoc_Aprendiz varchar(250) NOT NULL, Fecha_Pago Date, Pago_Actual Bigint NOT NULL, Pago_Pendiente Bigint NOT NULL, Pago_Total Bigint NOT NULL, Factura_Electronica Varchar(250) NOT NULL
