@@ -109,35 +109,62 @@ class UserController extends Controller
         $out = new \Symfony\Component\Console\Output\ConsoleOutput();
 
         $jwtValidator = new JwtAuth();
-
+        $response = array();
         $email = $request->input('correo_electronico', null);
         $pass = $request->input('contrasena', null);
-
         $paramsArray = ['correo_electronico' => $email, 'contrasena' => $pass];
 
-        $validateData = Validator::make($paramsArray, [
-            'correo_electronico' => 'required|email',
-            'contrasena' => 'required'
-        ]);
+        $validateExist = User::select('correo_electronico')->where('correo_electronico', $email)->first();
 
-        if ($validateData->fails()) {
-            $signUp = array(
+        if ($validateExist != null && !empty($validateExist)) {
+
+            $validateData = Validator::make($paramsArray, [
+                'correo_electronico' => 'required|email',
+                'contrasena' => 'required'
+            ]);
+
+            if ($validateData->fails()) {
+                $response = array(
+                    'status' => 'Error',
+                    'code' => 404,
+                    'message' => 'El usuario no se ha podido identificar',
+                    'data' => $validateData->errors()
+                );
+            } else {
+                $hashPass = hash('sha256', $paramsArray['contrasena']);
+
+                $signUp = $jwtValidator->signUp($paramsArray['correo_electronico'], $hashPass);
+
+                if (!empty($paramsArray['getToken'])) {
+                    $signUp = $jwtValidator->signUp($paramsArray['correo_electronico'], $hashPass, true);
+                }
+
+                if (!empty($signUp) && $signUp != '') {
+                    $response = array(
+                        'status' => 'Success',
+                        'code' => 200,
+                        'message' => 'El usuario ha sido identificado exitosamente.',
+                        'data' => $signUp
+                    );
+                } else {
+                    $response = array(
+                        'status' => 'Error',
+                        'code' => 500,
+                        'message' => 'Ocurrio un error mientras el usuario iniciaba sesión.',
+                        'data' => ''
+                    );
+                }
+            }
+        } else {
+            $response = array(
                 'status' => 'Error',
                 'code' => 404,
-                'message' => 'El usuario no se ha podido identificar',
-                'errors' => $validateData->errors()
+                'message' => 'El usuario con el que intenta logearse no existe en el sistema.',
+                'data' => ''
             );
-        } else {
-            $hashPass = hash('sha256', $paramsArray['contrasena']);
-
-            $signUp = $jwtValidator->signUp($paramsArray['correo_electronico'], $hashPass);
-
-            if (!empty($paramsArray['getToken'])) {
-                $signUp = $jwtValidator->signUp($paramsArray['correo_electronico'], $hashPass, true);
-            }
         }
-        $out->writeln("Hello from Terminal --- " . $signUp);
-        return response()->json($signUp, 200, ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8']);
+
+        return response()->json($response, 200, ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8']);
     }
 
 

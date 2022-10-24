@@ -5,21 +5,22 @@ ResponseApi responseApiFromJson(String str) => ResponseApi.fromJson(json.decode(
 String responseApiToJson(ResponseApi data) => json.encode(data.toJson());
 
 class ResponseApi {
-  String? error;
+  String? status;
+  int? code;
   String? message;
-  bool? success;
   dynamic data;
 
   ResponseApi({
-    this.error,
+    this.status,
+    this.code,
     this.message,
-    this.success,
+    this.data
   });
 
   ResponseApi.fromJson(Map<String, dynamic> json) {
-    error = json["error"];
+    status = json["status"];
+    code = json["code"];
     message = json["message"];
-    success = json["success"];
     try{
       data = json['data'];
     }catch(e){
@@ -28,8 +29,9 @@ class ResponseApi {
   }
 
   Map<String, dynamic> toJson() => {
-    "error": error,
+    "status": status,
+    "code": code,
     "message": message,
-    "success": success,
+    "data": data
   };
 }

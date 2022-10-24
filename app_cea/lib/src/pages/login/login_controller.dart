@@ -1,13 +1,15 @@
 import 'package:app_cea/src/models/response_api.dart';
 import 'package:app_cea/src/models/user.dart';
+import 'package:app_cea/src/pages/home/home_page.dart';
 import 'package:app_cea/src/provider/users_provider.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 
 class LoginController {
 
   BuildContext? context;
-
+  SharedPreferences? sharedPreferences;
   TextEditingController emailController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
 
@@ -37,11 +39,14 @@ class LoginController {
 
     ResponseApi responseApi = await usersProvider.login(user);
 
-    print('Respuesta: ${responseApi.toJson()}');
+    if(responseApi.code == 200 && responseApi != ''){
+      sharedPreferences?.setString("token", responseApi.data);
+      Navigator.of(context!).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => HomePage()), (Route<dynamic> route) => false);
+      print('Respuesta EXITOSA: ${responseApi.toJson()}');
+    }else{
+      print('Respuesta FALLIDA: ${responseApi.toJson()}');
+    }
 
-    print('\nEmail: $email ---- Contraseña: $password');
-    // if (kDebugMode) {
-    // }
   }
 
 }

@@ -1,8 +1,10 @@
 
 import 'package:app_cea/src/pages/custom_app_bar/custom_app_bar.dart';
+import 'package:app_cea/src/pages/login/login_page.dart';
 import 'package:app_cea/src/utils/custom_elements.dart';
 import 'package:app_cea/src/utils/my_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 List<String> locations = ['Boston (BOS)', 'New York (JFK)'];
 const TextStyle dropDownLabelStyle = TextStyle(color: Colors.white, fontSize: 16.0);
@@ -36,8 +38,19 @@ class HomeScreenTopPart extends StatefulWidget {
 
 class _HomeScreenTopPartState extends State<HomeScreenTopPart> {
   var selectedLocationIndex = 0;
-
+  SharedPreferences? sharedPreferences;
   @override
+  // void initState() {
+  //   super.initState();
+  //   checkLoginStatus();
+  // }
+
+  // checkLoginStatus()async{
+  //   sharedPreferences = await SharedPreferences.getInstance();
+  //   if(sharedPreferences?.getString("token") == null || sharedPreferences?.getString("token") == ''){
+  //     Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => const LoginPage()), (Route<dynamic> route) => false);
+  //   }
+  // }
   Widget build(BuildContext context) {
     return Stack(
       children: [

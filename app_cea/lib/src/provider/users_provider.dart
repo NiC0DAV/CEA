@@ -31,7 +31,7 @@ class UsersProvider{
     final res = await http.post(url, headers: headers, body: bodyParams);
     String parseData = res.body.toString();
     final data = jsonDecode(parseData);
-    // print(data.toString());
+
     ResponseApi responseApi = ResponseApi.fromJson(data);
 
     return responseApi;
