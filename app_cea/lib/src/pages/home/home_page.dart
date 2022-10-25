@@ -1,11 +1,13 @@
 
 import 'package:app_cea/src/pages/custom_app_bar/custom_app_bar.dart';
 import 'package:app_cea/src/pages/login/login_page.dart';
+import 'package:app_cea/src/pages/home/home_controller.dart';
 import 'package:app_cea/src/utils/custom_elements.dart';
 import 'package:app_cea/src/utils/my_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+HomeController _homeController = new HomeController();
 List<String> locations = ['Boston (BOS)', 'New York (JFK)'];
 const TextStyle dropDownLabelStyle = TextStyle(color: Colors.white, fontSize: 16.0);
 const TextStyle dropDownMenuItemStyle = TextStyle(color: Colors.black, fontSize: 16.0);
@@ -167,14 +169,15 @@ var  homeScreenBottomPart =  Column(
 );
 
 List<CityCard> cityCards = [
-  const CityCard(imagePath: "assets/img/peximg.jpg", moduleName: "Proximas\nActividades"),
-  const CityCard(imagePath: "assets/img/carlogimg.jpg", moduleName: "Mis Asistencias"),
-  const CityCard(imagePath: "assets/img/peximg.jpg", moduleName: "Mi Horario"),
-  const CityCard(imagePath: "assets/img/carlogimg.jpg", moduleName: "Mis Notas")
+  const CityCard(imagePath: "assets/img/peximg.jpg", moduleName: "Proximas\nActividades", onPressed: "_homecontroller.registerRoute"),
+  const CityCard(imagePath: "assets/img/carlogimg.jpg", moduleName: "Registrar Usuario", onPressed: ""),
+  const CityCard(imagePath: "assets/img/peximg.jpg", moduleName: "Mi Horario", onPressed: ""),
+  const CityCard(imagePath: "assets/img/carlogimg.jpg", moduleName: "Mis Notas", onPressed: "")
 ];
+
 class CityCard extends StatelessWidget {
-  final String imagePath, moduleName;
-  const CityCard({Key? key, required this.imagePath, required this.moduleName}) : super(key: key);
+  final String imagePath, moduleName, onPressed;
+  const CityCard({Key? key, required this.imagePath, required this.moduleName, required this.onPressed}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

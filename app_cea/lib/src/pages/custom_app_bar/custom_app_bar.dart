@@ -1,5 +1,8 @@
 import 'package:app_cea/src/utils/my_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:app_cea/src/pages/home/home_controller.dart';
+
+HomeController _homeController = new HomeController();
 
 class CustomAppBar extends StatelessWidget {
 
@@ -15,7 +18,7 @@ class CustomAppBar extends StatelessWidget {
     bottomBarItems.add(
       const BottomNavigationBarItem(
           icon: Icon(Icons.person_pin, color: Colors.black,),
-          label: 'Perfil',
+          label: 'Registros',
       ),
     );
 
@@ -36,10 +39,13 @@ class CustomAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: BottomNavigationBar(
-        items: bottomBarItems,
-        type: BottomNavigationBarType.fixed,
+    return GestureDetector(
+      onTap: _homeController.registerRoute,
+      child: Material(
+        child: BottomNavigationBar(
+          items: bottomBarItems,
+          type: BottomNavigationBarType.fixed,
+        ),
       ),
     );
   }

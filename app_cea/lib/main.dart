@@ -18,29 +18,39 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  @override
   SharedPreferences? sharedPreferences;
+  @override
   void initState(){
     super.initState();
-    checkLoginStatus();
-  }
-  
-  checkLoginStatus()async{
-    sharedPreferences = await SharedPreferences.getInstance();
-    if(sharedPreferences?.getString("token") == null || sharedPreferences?.getString("token") == ''){
+    dynamic stat = checkLoginStatus();
+
+    if(stat == false){
       Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => const LoginPage()), (Route<dynamic> route) => false);
+    }else if(stat == true){
+      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => const HomePage()), (Route<dynamic> route) => false);
     }
   }
 
+  checkLoginStatus()async{
+    dynamic status = true;
+    sharedPreferences = await SharedPreferences.getInstance();
+    if(sharedPreferences?.getString("token") == null || sharedPreferences?.getString("token") == ''){
+      status = false;
+    }
+    return status;
+  }
+
+  @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
       title: 'SGC-CEA',
       debugShowCheckedModeBanner: false,
       initialRoute: 'login',
       routes: {
-        'login' : (BuildContext context) => LoginPage(),
-        'register' : (BuildContext context) => RegisterPage(),
-        'home' : (BuildContext context) => HomePage(),
+        'login' : (BuildContext context) => const LoginPage(),
+        'register' : (BuildContext context) => const RegisterPage(),
+        'home' : (BuildContext context) => const HomePage(),
       },
       theme: ThemeData(
           appBarTheme: AppBarTheme(color: MyColors.primaryColor),
