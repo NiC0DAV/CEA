@@ -7,7 +7,7 @@ import 'package:app_cea/src/utils/my_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-HomeController _homeController = new HomeController();
+HomeController _homeController = HomeController();
 List<String> locations = ['Boston (BOS)', 'New York (JFK)'];
 const TextStyle dropDownLabelStyle = TextStyle(color: Colors.white, fontSize: 16.0);
 const TextStyle dropDownMenuItemStyle = TextStyle(color: Colors.black, fontSize: 16.0);
@@ -169,15 +169,15 @@ var  homeScreenBottomPart =  Column(
 );
 
 List<CityCard> cityCards = [
-  const CityCard(imagePath: "assets/img/peximg.jpg", moduleName: "Proximas\nActividades", onPressed: "_homecontroller.registerRoute"),
-  const CityCard(imagePath: "assets/img/carlogimg.jpg", moduleName: "Registrar Usuario", onPressed: ""),
-  const CityCard(imagePath: "assets/img/peximg.jpg", moduleName: "Mi Horario", onPressed: ""),
-  const CityCard(imagePath: "assets/img/carlogimg.jpg", moduleName: "Mis Notas", onPressed: "")
+  const CityCard(imagePath: "assets/img/peximg.jpg", moduleName: "Proximas\nActividades" ),
+  const CityCard(imagePath: "assets/img/carlogimg.jpg", moduleName: "Registrar\nUsuario"),
+  const CityCard(imagePath: "assets/img/peximg.jpg", moduleName: "Mi Horario"),
+  const CityCard(imagePath: "assets/img/carlogimg.jpg", moduleName: "Mis Notas")
 ];
 
 class CityCard extends StatelessWidget {
-  final String imagePath, moduleName, onPressed;
-  const CityCard({Key? key, required this.imagePath, required this.moduleName, required this.onPressed}) : super(key: key);
+  final String imagePath, moduleName;
+  const CityCard({Key? key, required this.imagePath, required this.moduleName}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -215,9 +215,12 @@ class CityCard extends StatelessWidget {
                   bottom: 10.0,
                   child: Row(
                     children: [
-                      Text(moduleName,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w500, color: Colors.white, fontSize: 18.0
+                      GestureDetector(
+                        onTap: ()=> _homeController.registerRoute(context),
+                        child: Text(moduleName,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w500, color: Colors.white, fontSize: 18.0
+                          ),
                         ),
                       )
                     ],

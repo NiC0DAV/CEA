@@ -26,6 +26,14 @@ class HomeController {
       );
     });
   }
+  homeRoute (BuildContext context) async {
+    await Future.delayed(Duration(seconds: 1), () {
+      Navigator.pushNamed(
+          context,
+          'home'
+      );
+    });
+  }
 
   // void login() async{
   //   String email = emailController.text.trim();

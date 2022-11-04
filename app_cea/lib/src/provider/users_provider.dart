@@ -37,4 +37,26 @@ class UsersProvider{
     return responseApi;
 
   }
+
+  Future<ResponseApi> register(User user) async{
+
+    Uri url = Uri.http(_url, '$_api/login');
+    String bodyParams = json.encode(user);
+    Map<String, String> headers = {
+      'Content-type': 'application/json',
+      'Charset':'utf-8',
+      'Accept':'application/json',
+      'connection': 'keep-alive',
+      'Accept-Encoding' : 'gzip, deflate, br',
+    };
+
+    final res = await http.post(url, headers: headers, body: bodyParams);
+    String parseData = res.body.toString();
+    final data = jsonDecode(parseData);
+
+    ResponseApi responseApi = ResponseApi.fromJson(data);
+
+    return responseApi;
+
+  }
 }
