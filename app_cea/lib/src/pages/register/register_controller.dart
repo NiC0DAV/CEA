@@ -9,9 +9,14 @@ class RegisterController{
 
   BuildContext? context;
 
+  TextEditingController userIdController = new TextEditingController();
+  TextEditingController tipoDocumentController = new TextEditingController();
   TextEditingController emailController = new TextEditingController();
   TextEditingController nameController = new TextEditingController();
   TextEditingController lastNameController = new TextEditingController();
+  TextEditingController addressController = new TextEditingController();
+  TextEditingController cellPhoneController = new TextEditingController();
+  TextEditingController userTypeController = new TextEditingController();
   TextEditingController phoneController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
   TextEditingController passConfirmController = new TextEditingController();
@@ -31,18 +36,28 @@ class RegisterController{
   }
 
   void register() async{
-    String email = emailController.text.trim();
+    String userId = userIdController.text.trim();
+    String tipoDoc = tipoDocumentController.text.trim();
     String name = nameController.text;
     String lastName = lastNameController.text;
-    String phone = phoneController.text.trim();
+    String address = addressController.text;
+    String email = emailController.text.trim();
+    int phone = phoneController.text as int;
+    int cellPhone = cellPhoneController.text as int;
+    String userType = userTypeController.text.trim();
     String password = passwordController.text.trim();
     String passwordConfirmation = passConfirmController.text.trim();
 
     User user = User(
-        correoElectronico: email,
+        userId: userId,
+        tipoDocumento: tipoDoc,
         nombres: name,
         apellidos: lastName,
-        // celular: phone,
+        direccion: address,
+        correoElectronico: email,
+        telefono: phone,
+        celular: cellPhone,
+        tipoUsuario: userType,
         contrasena: password
     );
 

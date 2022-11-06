@@ -40,7 +40,7 @@ class UsersProvider{
 
   Future<ResponseApi> register(User user) async{
 
-    Uri url = Uri.http(_url, '$_api/login');
+    Uri url = Uri.http(_url, '$_api/registar');
     String bodyParams = json.encode(user);
     Map<String, String> headers = {
       'Content-type': 'application/json',
