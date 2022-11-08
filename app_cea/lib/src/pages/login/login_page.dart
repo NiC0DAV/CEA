@@ -49,7 +49,7 @@ class _LoginPageState extends State<LoginPage> {
                       _emailTextField(),
                       _passTextField(),
                       _loginButton(),
-                      _rowElement(context)
+                      // _rowElement(context)
                     ]
                 ),
               ),
@@ -175,27 +175,27 @@ Widget _loginText(){
   );
 }
 
-Widget _rowElement(BuildContext context){
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      Text(
-        'No tienes Cuenta?',
-        style: TextStyle(
-            color: MyColors.primaryColor
-        ),
-      ),
-      const SizedBox(width: 7,),
-      GestureDetector(
-        onTap: () => _loginController.registerRoute(context),
-        child: Text(
-            'Registrate',
-            style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: MyColors.primaryColor
-            )
-        ),
-      )
-    ],
-  );
-}
+// Widget _rowElement(BuildContext context){
+//   return Row(
+//     mainAxisAlignment: MainAxisAlignment.center,
+//     children: [
+//       Text(
+//         'No tienes Cuenta?',
+//         style: TextStyle(
+//             color: MyColors.primaryColor
+//         ),
+//       ),
+//       const SizedBox(width: 7,),
+//       GestureDetector(
+//         onTap: () => _loginController.registerRoute(context),
+//         child: Text(
+//             'Registrate',
+//             style: TextStyle(
+//                 fontWeight: FontWeight.bold,
+//                 color: MyColors.primaryColor
+//             )
+//         ),
+//       )
+//     ],
+//   );
+// }

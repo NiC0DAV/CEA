@@ -5,12 +5,13 @@ import 'package:app_cea/src/models/response_api.dart';
 import 'package:app_cea/src/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UsersProvider{
-  String _url = Environment.API_CEA;
-  String _api = '/api/users';
-
+  SharedPreferences? sharedPreferences;
   BuildContext? context;
+  String _url = Environment.API_CEA;
+  String _api = '/api/admin';
 
   Future? init(BuildContext context){
     this.context = context;
@@ -39,13 +40,19 @@ class UsersProvider{
   }
 
   Future<ResponseApi> register(User user) async{
+    SharedPreferences cache = await SharedPreferences.getInstance();
+    dynamic token = cache.getString("token");
 
-    Uri url = Uri.http(_url, '$_api/registar');
+    Uri url = Uri.http(_url, '$_api/users/register');
     String bodyParams = json.encode(user);
+
+    print(bodyParams);
+
     Map<String, String> headers = {
       'Content-type': 'application/json',
       'Charset':'utf-8',
       'Accept':'application/json',
+      'Authorization':'$token',
       'connection': 'keep-alive',
       'Accept-Encoding' : 'gzip, deflate, br',
     };

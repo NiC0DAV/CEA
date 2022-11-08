@@ -2,6 +2,8 @@ import 'package:app_cea/src/pages/register/register_controller.dart';
 import 'package:app_cea/src/utils/my_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:dropdown_search/dropdown_search.dart';
+
 
 RegisterController _registerController = new RegisterController();
 List<String> docType = [
@@ -15,6 +17,7 @@ List<String> userType = [
   'Administrador',
   'Estudiante',
   'Recepcionista',
+  'Instructor',
   'Instructor'
 ];
 String? value ;
@@ -38,7 +41,6 @@ class _RegisterPageState extends State<RegisterPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
       _registerController.init(context);
     });
@@ -119,74 +121,89 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
 Widget _docTypeList(){
-  List<DropdownMenuItem<String>> _createList() {
-    return docType.map<DropdownMenuItem<String>>((e) => DropdownMenuItem(value: e, child: Text(e),),).toList();
-  }
-  return Container(
-    width: 315,
-    height: 55,
-    padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-    decoration: BoxDecoration(
-        color: MyColors.primaryOpacityColor,
-        borderRadius: BorderRadius.circular(30),
-    ),
-    child: DropdownButtonFormField(
-      decoration: const InputDecoration(
-        prefixIcon: Icon(Icons.credit_card, color: Color(0xFFE91E63)),
-        enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Color.fromRGBO(231, 13, 50, 0.09))
+    return Container(
+      width: 347,
+        height: 55,
+        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 1),
+        decoration: BoxDecoration(
+            color: MyColors.primaryOpacityColor,
+            borderRadius: BorderRadius.circular(30),
         ),
-        hintText: "Tipo de Documento",
-        hintStyle: TextStyle(color: Color(0xFFFF7782)),
-        border: InputBorder.none,
-        contentPadding: EdgeInsets.all(10),
+      child: DropdownSearch<String>(
+        popupProps: PopupProps.menu(
+          showSelectedItems: true,
+          disabledItemFn: (String s) => s.startsWith('I'),
+            searchFieldProps: TextFieldProps(
+                controller: _registerController.tipoDocumentController,
+            )
+        ),
+        items: docType,
+        dropdownDecoratorProps: const DropDownDecoratorProps(
+          dropdownSearchDecoration: InputDecoration(
+            prefixIcon: Icon(Icons.credit_card, color: Color(0xFFE91E63)),
+            enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Color.fromRGBO(231, 13, 50, 0.09))
+            ),
+            hintText: "Tipo de Documento",
+            hintStyle: TextStyle(color: Color(0xFFFF7782)),
+            border: InputBorder.none,
+            contentPadding: EdgeInsets.all(10),
+          ),
+        ),
+        onChanged: print,
       ),
-      items: _createList(),
-      isExpanded: true,
-      value: _selectedItem3,
-      onChanged: (String? value) => setState(() {
-        _selectedItem3 = value ?? "";
-      }),
-    ),
-  );
+    );
+
+    // DropdownSearch<String>.multiSelection(
+    //   items: ["Brazil", "Italia (Disabled)", "Tunisia", 'Canada'],
+    //   popupProps: PopupPropsMultiSelection.menu(
+    //     showSelectedItems: true,
+    //     disabledItemFn: (String s) => s.startsWith('I'),
+    //   ),
+    //   onChanged: print,
+    //   selectedItems: ["Brazil"],
+    // );
 }
 
   Widget _userTypeList(){
-    List<DropdownMenuItem<String>> _createList2() {
-      return userType.map<DropdownMenuItem<String>>((e) => DropdownMenuItem(value: e, child: Text(e),),).toList();
-    }
     return Container(
-      width: 315,
+      width: 347,
       height: 55,
-      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 1),
       decoration: BoxDecoration(
         color: MyColors.primaryOpacityColor,
         borderRadius: BorderRadius.circular(30),
       ),
-      child: DropdownButtonFormField(
-        decoration: const InputDecoration(
-          prefixIcon: Icon(Icons.verified_user_rounded, color: Color(0xFFE91E63)),
-          enabledBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: Color.fromRGBO(231, 13, 50, 0.09))
-          ),
-          hintText: "Tipo de Usuario",
-          hintStyle: TextStyle(color: Color(0xFFFF7782)),
-          border: InputBorder.none,
-          contentPadding: EdgeInsets.all(10),
+      child: DropdownSearch<String>(
+        popupProps: PopupProps.menu(
+          showSelectedItems: true,
+          disabledItemFn: (String s) => s.startsWith('I'),
+            searchFieldProps: TextFieldProps(
+              controller: _registerController.userTypeController,
+            )
         ),
-        items: _createList2(),
-        isExpanded: true,
-        value: _selectedItem4,
-        onChanged: (String? value) => setState(() {
-          _selectedItem4 = value ?? "";
-        }),
+        items: userType,
+        dropdownDecoratorProps: const DropDownDecoratorProps(
+          dropdownSearchDecoration: InputDecoration(
+            prefixIcon: Icon(Icons.verified_user_rounded, color: Color(0xFFE91E63)),
+            enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Color.fromRGBO(231, 13, 50, 0.09))
+            ),
+            hintText: "Tipo de Usuario",
+            hintStyle: TextStyle(color: Color(0xFFFF7782)),
+            border: InputBorder.none,
+            contentPadding: EdgeInsets.all(10),
+          ),
+        ),
+        onChanged: print,
       ),
     );
+
   }
 
   Widget _userIdField() {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 50, vertical: 5),
+      margin: EdgeInsets.symmetric(horizontal: 34, vertical: 5),
       decoration: BoxDecoration(
           color: MyColors.primaryOpacityColor,
           borderRadius: BorderRadius.circular(30),
@@ -207,18 +224,19 @@ Widget _docTypeList(){
 
   Widget _addressTextField() {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 50, vertical: 5),
+      margin: EdgeInsets.symmetric(horizontal: 34, vertical: 5),
+      // width: 347,
       decoration: BoxDecoration(
           color: MyColors.primaryOpacityColor,
           borderRadius: BorderRadius.circular(30)),
       child: TextField(
-        controller: _registerController.emailController,
+        controller: _registerController.addressController,
         keyboardType: TextInputType.streetAddress,
         decoration: InputDecoration(
           hintText: 'Direccion de Residencia',
           border: InputBorder.none,
           contentPadding: EdgeInsets.all(15),
-          prefixIcon: Icon(Icons.email, color: MyColors.primaryColor),
+          prefixIcon: Icon(Icons.place, color: MyColors.primaryColor),
           hintStyle: TextStyle(color: MyColors.primaryColorDark),
         ),
       ),
@@ -227,7 +245,7 @@ Widget _docTypeList(){
 
   Widget _emailTextField() {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 50, vertical: 5),
+      margin: EdgeInsets.symmetric(horizontal: 34, vertical: 5),
       decoration: BoxDecoration(
           color: MyColors.primaryOpacityColor,
           borderRadius: BorderRadius.circular(30)),
@@ -247,7 +265,7 @@ Widget _docTypeList(){
 
   Widget _nameTextField() {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 50, vertical: 5),
+      margin: EdgeInsets.symmetric(horizontal: 34, vertical: 5),
       decoration: BoxDecoration(
           color: MyColors.primaryOpacityColor,
           borderRadius: BorderRadius.circular(30)),
@@ -267,7 +285,7 @@ Widget _docTypeList(){
 
   Widget _lastNameTextField() {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 50, vertical: 5),
+      margin: EdgeInsets.symmetric(horizontal: 34, vertical: 5),
       decoration: BoxDecoration(
           color: MyColors.primaryOpacityColor,
           borderRadius: BorderRadius.circular(30)),
@@ -287,7 +305,7 @@ Widget _docTypeList(){
 
   Widget _phoneTextField() {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 50, vertical: 5),
+      margin: EdgeInsets.symmetric(horizontal: 34, vertical: 5),
       decoration: BoxDecoration(
           color: MyColors.primaryOpacityColor,
           borderRadius: BorderRadius.circular(30)),
@@ -307,12 +325,12 @@ Widget _docTypeList(){
 
   Widget _cellPhoneTextField() {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 50, vertical: 5),
+      margin: EdgeInsets.symmetric(horizontal: 34, vertical: 5),
       decoration: BoxDecoration(
           color: MyColors.primaryOpacityColor,
           borderRadius: BorderRadius.circular(30)),
       child: TextField(
-        controller: _registerController.phoneController,
+        controller: _registerController.cellPhoneController,
         keyboardType: TextInputType.phone,
         decoration: InputDecoration(
           hintText: 'Celular',
@@ -327,7 +345,7 @@ Widget _docTypeList(){
 
   Widget _passwordTextField() {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 50, vertical: 5),
+      margin: EdgeInsets.symmetric(horizontal: 34, vertical: 5),
       decoration: BoxDecoration(
           color: MyColors.primaryOpacityColor,
           borderRadius: BorderRadius.circular(30)),
@@ -349,7 +367,7 @@ Widget _docTypeList(){
 
   Widget _passwordConfirmationTextField() {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 50, vertical: 5),
+      margin: EdgeInsets.symmetric(horizontal: 34, vertical: 5),
       decoration: BoxDecoration(
           color: MyColors.primaryOpacityColor,
           borderRadius: BorderRadius.circular(30)),
@@ -372,7 +390,7 @@ Widget _docTypeList(){
   Widget _registerButton() {
     return Container(
       width: double.infinity,
-      margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+      margin: const EdgeInsets.symmetric(horizontal: 34, vertical: 20),
       child: ElevatedButton(
         onPressed: _registerController.register,
         child: Text('REGISTRARME'),

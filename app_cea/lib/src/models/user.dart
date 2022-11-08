@@ -17,11 +17,9 @@ class User {
   String? direccion;
   String? correoElectronico;
   String? contrasena;
-  int? telefono;
-  int? celular;
+  String? telefono;
+  String? celular;
   String? tipoUsuario;
-  DateTime? createdAt;
-  DateTime? updatedAt;
 
   User({
     this.userId,
@@ -34,8 +32,6 @@ class User {
     this.telefono,
     this.celular,
     this.tipoUsuario,
-    this.createdAt,
-    this.updatedAt,
   });
 
   factory User.fromJson(Map<String, dynamic> json) => User(
@@ -49,8 +45,6 @@ class User {
     telefono: json["telefono"],
     celular: json["celular"],
     tipoUsuario: json["tipo_usuario"],
-    createdAt: DateTime.parse(json["created_at"]),
-    updatedAt: DateTime.parse(json["updated_at"]),
   );
 
   Map<String, dynamic> toJson() => {
@@ -64,7 +58,5 @@ class User {
     "telefono": telefono,
     "celular": celular,
     "tipo_usuario": tipoUsuario,
-    "created_at": createdAt?.toIso8601String(),
-    "updated_at": updatedAt?.toIso8601String(),
   };
 }

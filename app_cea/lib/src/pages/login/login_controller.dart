@@ -40,9 +40,16 @@ class LoginController {
     ResponseApi responseApi = await usersProvider.login(user);
 
     if(responseApi.code == 200 && responseApi != ''){
-      sharedPreferences?.setString("token", responseApi.data);
-      Navigator.of(context!).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => HomePage()), (Route<dynamic> route) => false);
-      print('Respuesta EXITOSA: ${responseApi.toJson()}');
+      SharedPreferences cache = await SharedPreferences.getInstance();
+      dynamic token = cache.setString("token", responseApi.data);
+      dynamic tokenSaved = cache.getString("token");
+      print('Respuesta EXITOSA: ${responseApi.toJson()}\n');
+      print('${token}XX-------XX${tokenSaved}');
+      if(cache.getString("token") != '' && cache.getString("token") != null){
+        Navigator.of(context!).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => HomePage()), (Route<dynamic> route) => false);
+      }else{
+        print('HUBO UN ERROR NO HAY TOKEN ${token}XX-------XX${tokenSaved}');
+      }
     }else{
       print('Respuesta FALLIDA: ${responseApi.toJson()}');
     }

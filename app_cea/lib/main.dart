@@ -33,8 +33,8 @@ class _MyAppState extends State<MyApp> {
 
   checkLoginStatus()async{
     dynamic status = true;
-    sharedPreferences = await SharedPreferences.getInstance();
-    if(sharedPreferences?.getString("token") == null || sharedPreferences?.getString("token") == ''){
+    SharedPreferences cache = await SharedPreferences.getInstance();
+    if(cache.getString("token") == null || cache.getString("token") == ''){
       status = false;
     }
     return status;
